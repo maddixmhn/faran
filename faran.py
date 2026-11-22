@@ -6,9 +6,11 @@ from datetime import datetime, timezone
 
 STATE = Path(".faran/state.json")
 ACTIVE = [
-    "university_coordinator", "security_department_head", "hardening_professor",
-    "teaching_assistant", "instructional_designer", "registrar", "lab_specialist",
-    "it_coordinator", "cost_analyst", "hr_capacity_analyst", "draft_marketer", "independent_evaluator",
+    "خانم بیات · مدیر ارشد دانشگاه", "دکتر فرخی · مدیر گروه فناوری اطلاعات",
+    "دکتر شکراللی · مدیر گروه مهندسی کامپیوتر", "خانم کلهرودی · مدیر آموزش",
+    "استاد هاردنینگ", "دستیار آموزشی", "طراح آموزشی", "کارشناس آموزش و ثبت‌نام",
+    "متخصص آزمایشگاه محکم‌بان", "هماهنگ‌کنندهٔ IT", "تحلیلگر هزینه",
+    "کارشناس ظرفیت منابع انسانی", "پیش‌نویس‌نویس معرفی درس", "ارزیاب مستقل دکتر سلیمانی",
 ]
 
 def load():
@@ -21,12 +23,13 @@ def save(s):
     STATE.write_text(json.dumps(s, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 def seed(s):
-    existing = {x["id"] for x in s["roles"]}
+    roles = {x["id"]: x for x in s["roles"]}
     for i in range(1, 2001):
         rid = f"role-{i:04d}"
-        if rid not in existing:
-            s["roles"].append({"id": rid, "title": ACTIVE[i-1] if i <= 12 else f"synthetic_specialist_{i:04d}", "active": i <= 12, "unit": "mock"})
-    s["roles"].sort(key=lambda x: x["id"])
+        role = roles.get(rid, {"id": rid})
+        role.update({"title": ACTIVE[i-1] if i <= len(ACTIVE) else f"synthetic_specialist_{i:04d}", "active": i <= len(ACTIVE), "unit": "mock"})
+        roles[rid] = role
+    s["roles"] = sorted(roles.values(), key=lambda x: x["id"])
     return len(s["roles"])
 
 def run(s, task_id):
@@ -54,7 +57,7 @@ def main():
     sub.add_parser("status")
     a = p.parse_args(); s = load()
     if a.cmd == "seed":
-        n = seed(s); save(s); out = {"mode":"mock", "roles":n, "active_sample_roles":12}
+        n = seed(s); save(s); out = {"mode":"mock", "roles":n, "active_sample_roles":len(ACTIVE)}
     elif a.cmd == "run":
         r = run(s, a.task_id); r["evaluation"] = evaluate(r); save(s); out = r
     else: out = {"mode":s["mode"], "roles":len(s["roles"]), "runs":len(s["runs"]), "schedule":s["schedule"]}

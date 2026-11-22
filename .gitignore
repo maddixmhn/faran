@@ -9,3 +9,5 @@ android/build/
 *.aab
 
 .vercel
+
+evaluator/

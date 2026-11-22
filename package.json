@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Faran University Agent Platform - installable mock-only RTL PWA and Android shell",
   "main": "faran.py",
-  "scripts": {"android:sync":"npx cap sync android", "android:open":"npx cap open android"},
+  "scripts": {"copy:web":"node copy-web.mjs", "android:sync":"npm run copy:web && npx cap sync android", "android:open":"npx cap open android"},
   "keywords": [],
   "author": "",
   "license": "MIT",

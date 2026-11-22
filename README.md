@@ -18,4 +18,7 @@ See [docs/ROADMAP.md](docs/ROADMAP.md) for acceptance and next steps.
 
 ## PWA and Android
 
-The Persian RTL dashboard is served from the repository root for Vercel. It includes an installable web manifest, an offline shell cache, and a mock workflow that saves demo state in browser local storage. Native Android wrapper is generated with Capacitor 8; run `npm ci`, copy root web files into `www`, then `npm run android:sync` and open `android/` in Android Studio. The Android wrapper requires Android SDK/Gradle tooling to produce an APK. UI workflow state is browser-local and does not sync across devices.
+The Persian RTL dashboard is served from the repository root for Vercel. It includes an installable web manifest, an offline shell cache, and a mock workflow that saves demo state in browser local storage. Native Android wrapper is generated with Capacitor 8; run `npm ci`, `npm run android:sync`, then open `android/` in Android Studio. The Android wrapper requires Android SDK/Gradle tooling to produce an APK. UI workflow state is browser-local and does not sync across devices.
+
+
+ارزیاب مستقل در مخزن [dr-soleimani-evaluator](https://github.com/maddixmhn/dr-soleimani-evaluator) توسعه می‌یابد و با فایل JSON پالایش‌شدهٔ قرارداد v1 تبادل می‌کند.
