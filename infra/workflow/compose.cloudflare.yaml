@@ -1,0 +1,13 @@
+services:
+  cloudflared:
+    image: cloudflare/cloudflared:2026.11.1
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run --token ${CF_TUNNEL_TOKEN:?Set the tunnel token only in the untracked .env file}
+    depends_on:
+      paperclip:
+        condition: service_healthy
+      n8n:
+        condition: service_healthy
+    networks:
+      - services
+

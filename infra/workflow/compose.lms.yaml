@@ -1,0 +1,28 @@
+name: faran-lms
+services:
+  lms:
+    image: ${FARAN_LMS_IMAGE:-moodlehq/moodle-php-apache:8.3}
+    ports:
+      - "127.0.0.1:8700:80"
+    volumes:
+      - ./data/lms/moodle:/var/www/html
+      - moodledata:/var/www/moodledata
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: moodle
+      POSTGRES_USER: moodle
+      POSTGRES_PASSWORD: ${FARAN_LMS_DB_PASSWORD:?Set the local LMS database password}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD, pg_isready, -U, moodle, -d, moodle]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+volumes:
+  pgdata:
+  moodledata:

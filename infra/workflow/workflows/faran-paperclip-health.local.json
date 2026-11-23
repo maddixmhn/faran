@@ -1,0 +1,80 @@
+{
+  "name": "Faran · Paperclip health probe · local manual read-only",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "5e8872f2-3d4b-4a2d-a785-d21c6bc9ef01",
+      "name": "Manual start",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "http://host.docker.internal:3100/api/health",
+        "options": {
+          "timeout": 5000
+        }
+      },
+      "id": "f47ce7c4-569d-40c0-9f6b-1a2db1e7ab02",
+      "name": "Read Paperclip health",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        480,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const input = $input.all();\nreturn input.map(({ json }) => ({ json: { service: 'paperclip', reachable: true, checked_at: new Date().toISOString(), reported_keys: Object.keys(json).sort(), changes_made: false, agent_run_started: false } }));"
+      },
+      "id": "c8bfa747-fceb-40e1-97dd-7c72a93a4b03",
+      "name": "Normalize read-only result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        760,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Manual start": {
+      "main": [
+        [
+          {
+            "node": "Read Paperclip health",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Paperclip health": {
+      "main": [
+        [
+          {
+            "node": "Normalize read-only result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "c17ea6cb-4961-4ec5-a900-f34229fcb305",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "tags": [],
+  "id": "A46RXBQie7idS5bo"
+}

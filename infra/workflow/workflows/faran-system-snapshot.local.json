@@ -1,0 +1,79 @@
+{
+  "name": "Faran · وضعیت یکپارچهٔ Paperclip · local manual read-only",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "3f1ef0be-3f6c-43ec-a662-75b94d5cbd01",
+      "name": "Manual start",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://host.docker.internal:3100/api/health",
+        "options": {
+          "timeout": 5000
+        }
+      },
+      "id": "e522113f-7e91-4e08-86aa-750759424e02",
+      "name": "Read Paperclip health",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://host.docker.internal:3100/api/companies/15af0af3-1b60-4bbb-8dc3-f969c2206ea4/agents",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "timeout": 5000
+        }
+      },
+      "id": "29e554d0-e990-45d9-9b73-4548dc38fc03",
+      "name": "Read Faran role status",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [760, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "c8a0394e-0d78-4f0d-9d42-18b74da6719a",
+          "name": "Faran Paperclip Local Observer"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const agents = $input.all().map(({ json }) => json);\nif (agents.length === 0 || agents.some((agent) => typeof agent !== 'object' || agent === null)) throw new Error('Paperclip returned an unexpected agent list.');\nconst health = $('Read Paperclip health').first().json;\nconst safeAgents = agents.map((agent) => ({\n  name: String(agent.name ?? 'نامشخص'),\n  role: String(agent.role ?? 'نامشخص'),\n  status: String(agent.status ?? 'unknown'),\n  heartbeatEnabled: Boolean(agent.runtimeConfig?.heartbeat?.enabled),\n  monthlyBudgetCents: Number(agent.budgetMonthlyCents ?? 0),\n  lastHeartbeatAt: agent.lastHeartbeatAt ?? null,\n}));\nconst counts = Object.fromEntries([...new Set(safeAgents.map((agent) => agent.status))].map((status) => [status, safeAgents.filter((agent) => agent.status === status).length]));\nreturn [{ json: { observedAt: new Date().toISOString(), paperclip: { reachable: true, reportedKeys: Object.keys(health).sort() }, companyId: '15af0af3-1b60-4bbb-8dc3-f969c2206ea4', totalRoles: safeAgents.length, counts, agents: safeAgents, changesMade: false, agentRunsStarted: false } }];"
+      },
+      "id": "36765181-4fa1-4138-b52c-1f993883d204",
+      "name": "Build safe system snapshot",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1040, 300]
+    }
+  ],
+  "connections": {
+    "Manual start": {
+      "main": [[{"node": "Read Paperclip health", "type": "main", "index": 0}]]
+    },
+    "Read Paperclip health": {
+      "main": [[{"node": "Read Faran role status", "type": "main", "index": 0}]]
+    },
+    "Read Faran role status": {
+      "main": [[{"node": "Build safe system snapshot", "type": "main", "index": 0}]]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "a80844d6-5c61-4a73-8da6-e5ca02fa04d9",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "tags": [],
+  "id": "LOZ6JZ7kvnh9Cw3a"
+}

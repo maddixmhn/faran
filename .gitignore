@@ -10,4 +10,9 @@ android/build/
 
 .vercel
 
+# Local workflow deployment secrets and persistent service data
+/infra/workflow/.env
+/infra/workflow/.env.production
+/infra/workflow/data/
+
 evaluator/

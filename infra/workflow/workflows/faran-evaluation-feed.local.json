@@ -1,0 +1,54 @@
+{
+  "name": "Faran → ارزیاب دکتر سلیمانی · تاریخچهٔ اجرا · local manual read-only",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "3e4bc5ad-52b2-47ef-a5e3-cfc37a304625",
+      "name": "Manual start",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://host.docker.internal:3100/api/companies/15af0af3-1b60-4bbb-8dc3-f969c2206ea4/heartbeat-runs?limit=1000&summary=true",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": { "timeout": 12000 }
+      },
+      "id": "18a98645-82cc-4b3d-b246-6ac96600312b",
+      "name": "Read Paperclip run history",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "alwaysOutputData": true,
+      "position": [520, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "c8a0394e-0d78-4f0d-9d42-18b74da6719a",
+          "name": "Faran Paperclip Local Observer"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const rows = $('Read Paperclip run history').all().map(({ json }) => json);\nconst runs = rows.flatMap((row) => Array.isArray(row) ? row : Array.isArray(row.runs) ? row.runs : Array.isArray(row.items) ? row.items : row.run ? [row.run] : row.id || row.runId ? [row] : []);\nif (runs.length > 1000) throw new Error('Paperclip run history exceeded the 1000-run export limit.');\nconst iso = (v) => { const d = v ? new Date(v) : null; return d && Number.isFinite(d.getTime()) ? d.toISOString() : null; };\nconst events = runs.map((run, i) => {\n  const id = String(run.id ?? run.runId ?? '');\n  const startedAt = iso(run.startedAt ?? run.started_at ?? run.createdAt ?? run.created_at);\n  const endedAt = iso(run.endedAt ?? run.finishedAt ?? run.completedAt ?? run.ended_at ?? run.finished_at);\n  const raw = String(run.status ?? 'unknown').toLowerCase();\n  const map = { succeeded: 'completed', success: 'completed', done: 'completed', completed: 'completed', failed: 'failed', error: 'failed', blocked: 'blocked', cancelled: 'cancelled', canceled: 'cancelled' };\n  const status = map[raw] ?? raw;\n  const duration = startedAt && endedAt ? Math.max(0, Date.parse(endedAt) - Date.parse(startedAt)) : null;\n  return { event_id: `paperclip:${id || `row-${i}`}`, schema_version: '1.0', occurred_at: endedAt ?? startedAt ?? new Date().toISOString(), agent_id: String(run.agentId ?? run.agent_id ?? 'unknown-agent'), task_id: String(run.issueId ?? run.issue_id ?? id ?? `row-${i}`), status, duration_ms: duration, policy_version: null, evidence_refs: id ? [`paperclip-run:${id}`] : [], synthetic: false };\n});\nreturn [{ json: { contract: 'faran-event-schema/1.0', source: 'paperclip-local-read-only', company_id: '15af0af3-1b60-4bbb-8dc3-f969c2206ea4', generated_at: new Date().toISOString(), synthetic: false, evidence_status: events.length ? 'real-run-metadata-unverified' : 'connected-no-runs', event_count: events.length, events, changes_made: false, agent_runs_started: false, note: 'Only run metadata is exported. Prompts, issue descriptions, comments, provider traces, credentials, and learner data are excluded.' } }];"
+      },
+      "id": "50f6b13d-e94d-465e-a5fd-9d55d724fd97",
+      "name": "Sanitize evaluation evidence",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [820, 300]
+    }
+  ],
+  "connections": {
+    "Manual start": { "main": [[{ "node": "Read Paperclip run history", "type": "main", "index": 0 }]] },
+    "Read Paperclip run history": { "main": [[{ "node": "Sanitize evaluation evidence", "type": "main", "index": 0 }]] }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "versionId": "956ccfd1-4681-45df-bf76-87205acc09e9",
+  "meta": { "templateCredsSetupCompleted": true },
+  "tags": [],
+  "id": "EvalFeedLocal01"
+}

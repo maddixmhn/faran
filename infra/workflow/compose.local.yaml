@@ -1,0 +1,85 @@
+services:
+  runtime-summary:
+    profiles: [dashboards]
+    image: node:22-alpine
+    user: node
+    command: [node, /app/runtime-summary.mjs]
+    volumes:
+      - ./web/runtime-summary.mjs:/app/runtime-summary.mjs:ro
+    read_only: true
+    restart: unless-stopped
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+  faran-web:
+    profiles: [dashboards]
+    build:
+      context: ../..
+      dockerfile: infra/workflow/web/faran.Dockerfile
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8000:80"
+    read_only: true
+    tmpfs:
+      - /var/cache/nginx
+      - /var/run
+      - /tmp
+    cap_drop: [ALL]
+    cap_add: [NET_BIND_SERVICE, CHOWN, SETUID, SETGID]
+    security_opt: [no-new-privileges:true]
+    healthcheck:
+      test: [CMD-SHELL, "wget -q -O /dev/null http://127.0.0.1/ || exit 1"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+
+  evaluator-web:
+    depends_on: [runtime-summary]
+    volumes:
+      - ./web/evaluator.conf:/etc/nginx/conf.d/default.conf:ro
+    profiles: [dashboards]
+    build:
+      context: ../../../dr-soleimani-evaluator
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8001:80"
+    read_only: true
+    tmpfs:
+      - /var/cache/nginx
+      - /var/run
+      - /tmp
+    cap_drop: [ALL]
+    cap_add: [NET_BIND_SERVICE, CHOWN, SETUID, SETGID]
+    security_opt: [no-new-privileges:true]
+    healthcheck:
+      test: [CMD-SHELL, "wget -q -O /dev/null http://127.0.0.1/ || exit 1"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+
+  n8n-db:
+    # PostgreSQL for the workflow engine.
+    # Local compatibility image already present on this host; production uses
+    # PostgreSQL 18, which is current in the upstream supported range.
+    image: postgres:16-alpine
+
+  paperclip:
+    # The local workflow talks to the host-run Paperclip CLI instance. Enable
+    # this profile only when the Docker image is available instead.
+    profiles: [container-paperclip]
+    ports:
+      - "127.0.0.1:3100:3100"
+
+  n8n:
+    # This host has the official 2.46.4 image cached by immutable digest.
+    # The production pin 2.48.7 currently returns 403 from this registry.
+    image: docker.n8n.io/n8nio/n8n@sha256:4384b9ff20a78bc1708c35ce7864f84f724611de7801fb36d715998db7c000f1
+    ports:
+      - "127.0.0.1:5678:5678"
+    environment:
+      N8N_HOST: localhost
+      N8N_PROTOCOL: http
+      N8N_EDITOR_BASE_URL: http://localhost:5678/
+      N8N_WEBHOOK_URL: http://localhost:5678/
+      N8N_PROXY_HOPS: "0"
+      N8N_SECURE_COOKIE: "false"

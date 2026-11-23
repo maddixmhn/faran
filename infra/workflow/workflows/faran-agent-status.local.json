@@ -1,0 +1,63 @@
+{
+  "name": "Faran · وضعیت نقش‌ها · local manual read-only",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "09131dd0-e1c6-42d5-9904-8a1061c3bf01",
+      "name": "Manual start",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://host.docker.internal:3100/api/companies/15af0af3-1b60-4bbb-8dc3-f969c2206ea4/agents",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "timeout": 5000
+        }
+      },
+      "id": "0f5c4d31-7d98-4ec7-a649-f3b14129a302",
+      "name": "Read Faran role status",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [500, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "c8a0394e-0d78-4f0d-9d42-18b74da6719a",
+          "name": "Faran Paperclip Local Observer"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const agents = $input.all().map(({ json }) => json);\nif (agents.length === 0 || agents.some((agent) => typeof agent !== 'object' || agent === null)) throw new Error('Paperclip returned an unexpected agent list.');\nconst safeAgents = agents.map((agent) => ({\n  name: String(agent.name ?? 'نامشخص'),\n  role: String(agent.role ?? 'نامشخص'),\n  status: String(agent.status ?? 'unknown'),\n  heartbeatEnabled: Boolean(agent.runtimeConfig?.heartbeat?.enabled),\n  monthlyBudgetCents: Number(agent.budgetMonthlyCents ?? 0),\n  lastHeartbeatAt: agent.lastHeartbeatAt ?? null,\n}));\nconst counts = Object.fromEntries([...new Set(safeAgents.map((agent) => agent.status))].map((status) => [status, safeAgents.filter((agent) => agent.status === status).length]));\nreturn [{ json: { source: 'paperclip', companyId: '15af0af3-1b60-4bbb-8dc3-f969c2206ea4', observedAt: new Date().toISOString(), totalRoles: safeAgents.length, counts, agents: safeAgents, changesMade: false, agentRunsStarted: false } }];"
+      },
+      "id": "1ad622de-aad0-459d-95e4-12d6dc93ed03",
+      "name": "Sanitize and summarize",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [800, 300]
+    }
+  ],
+  "connections": {
+    "Manual start": {
+      "main": [[{"node": "Read Faran role status", "type": "main", "index": 0}]]
+    },
+    "Read Faran role status": {
+      "main": [[{"node": "Sanitize and summarize", "type": "main", "index": 0}]]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "7e3c1aa1-27b2-4574-ac8e-1d6301db5f13",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "tags": [],
+  "id": "zIsIrFlZaYyVcGSO"
+}

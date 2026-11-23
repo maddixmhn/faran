@@ -1,0 +1,8 @@
+services:
+  lms:
+    volumes:
+      - lmscode:/var/www/html:ro
+volumes:
+  lmscode:
+    external: true
+    name: faran-lms_code

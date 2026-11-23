@@ -1,10 +1,41 @@
-# فاران | Faran University Agent Platform
+# دانشگاه مجازی ایجنتیک فاران
 
-Local, synthetic-data prototype for a multi-department digital university. Current version is mock-only; Paperclip, models, cloud services, and scheduled execution are disconnected/disabled. Marketing output is a draft.
+نمونهٔ فارسی و راست‌چین برای نمایش ساختار یک دانشگاه مجازی که در آن ایجنت‌های نرم‌افزاری وظایف آموزشی و عملیاتیِ محدود و تعریف‌شده را انجام می‌دهند. این مخزن دو بخش دارد: داشبورد نصب‌پذیر وب/اندروید و نمونهٔ خط‌فرمان پایتون. داشبورد دانشگاه و CLI همچنان Mock-only هستند؛ محیط محلی Paperclip+n8n جداگانه است و سه نمودار دستی/فقط‌خواندنی سلامت و وضعیت نقش‌ها دارد. اجراهای ۱، ۳ و ۴ موفق‌اند؛ اتصال داشبورد دانشگاه به دادهٔ واقعی و اجرای agent هنوز فعال نشده است.
 
-## Run
+## مشخصات پروژهٔ درسی
 
-Requires Python 3.10+; no third-party packages or paid API key.
+- **درس:** سمینار
+- **استاد ارائه:** دکتر سعید شکراللهی
+- **دانشجو:** محمد مهرانی
+- **مخزن:** [github.com/maddixmhn/faran](https://github.com/maddixmhn/faran)
+- **نسخهٔ نمایشی وب:** [faran-mu.vercel.app](https://faran-mu.vercel.app)
+- **ارزیاب همراه:** [مخزن دکتر سلیمانی](https://github.com/maddixmhn/dr-soleimani-evaluator) · [نسخهٔ وب](https://dr-soleimani-evaluator.vercel.app)
+
+> نام اشخاص در اطلاعات پروژه/درس به کار رفته است. ایجنت‌های نمونه شخصیت یا گفتار افراد واقعی را بازسازی نمی‌کنند؛ آن‌ها نقش‌های نرم‌افزاریِ شبیه‌سازی‌شده با دامنهٔ کار و اختیار مشخص‌اند. وظایف حساس آموزشی، دسترسی، انتشار و تصمیم دربارهٔ دانشجو نیازمند بازبینی مسئول انسانی هستند.
+
+## وضعیت فعلی و دامنه
+
+داشبورد یک نمونهٔ PWA است: ناوبری دانشگاه، کاتالوگ درس، سازمان نمونه، فهرست نقش‌های شبیه‌سازی‌شده، اجرای دستی یک گردش‌کار ساختگی، گزارش اجرا و خروجی JSON پالایش‌شده را نشان می‌دهد. رابط وب وضعیت هر اجرا را در `localStorage` همان مرورگر نگه می‌دارد؛ این داده بین دستگاه‌ها همگام نمی‌شود. وقتی همین داشبورد روی `localhost` اجرا شود، کارت جداگانه‌ای برای بازکردن پنل بومی n8n نشان می‌دهد؛ روی دامنهٔ عمومی هیچ پیوندی به localhost ظاهر نمی‌شود و ورود مالک n8n همچنان لازم است.
+
+گردش‌کار فعلی fixture آفلاین را اجرا می‌کند و نتیجه‌ای قطعی و بازتولیدپذیر می‌سازد. هزینهٔ مدل در این سناریو صفر است، چون API مدل فراخوانی نمی‌شود. این نسخه اسکن امنیتی واقعی انجام نمی‌دهد، LMS را نمی‌خواند، ایمیل/نمره/ثبت‌نام/پرداخت را تغییر نمی‌دهد و ادعای مدیریت مستقل یک دانشگاه واقعی ندارد. تعدادهای روی داشبورد دادهٔ سناریوی ساختگی‌اند، نه آمار عملیاتی.
+
+درصد تحویل هر فاز در [وضعیت مشترک دو پروژه](docs/DELIVERY-STATUS.md) ثبت می‌شود. نقشهٔ [فازهای Paperclip/n8n](docs/WORKFLOW-ROADMAP.md) امتیاز جداگانهٔ همان زیرپروژه است و درصد تکمیل کل دانشگاه یا ارزیاب نیست.
+
+بذر محلی `.faran/state.json` دقیقاً ۲٬۰۰۰ شناسهٔ Mock دارد و ۱۴ نقش در سناریو فعال‌اند. این‌ها agentهای Paperclip نیستند: در Paperclip اکنون چهار agent با وضعیت `pending_approval` ثبت شده‌اند؛ مدل/provider ندارند و هیچ‌کدام اجرا نشده‌اند. وضعیت و درصد تحویل هر نوبت در گزارش پروژه ثبت می‌شود.
+
+مهارت‌های پایهٔ نقش‌ها و حدود اختیارشان در داشبورد و [کاتالوگ مهارت ایجنت‌ها](docs/AGENT-SKILLS-CATALOG.md) آمده است. این مهارت‌ها در نسخهٔ فعلی تعریفی هستند؛ ابزار امنیتی نصب یا فعال نشده است.
+
+## پیش‌نیازها
+
+- Python 3.10 یا جدیدتر برای نمونهٔ خط‌فرمان
+- Node.js برای همگام‌سازی اپ اندروید (نسخهٔ سازگار با Capacitor 8، ترجیحاً Node 22)
+- Android Studio، Android SDK، JDK سازگار و Gradle Wrapper برای ساخت APK
+- وب‌سرور محلی برای فعال‌شدن Service Worker؛ برای نسخهٔ Mock نیاز به کلید API یا بستهٔ پایتون خارجی نیست
+- Docker Desktop با Linux Engine برای اجرای محلی Paperclip/n8n؛ در استقرار پیوسته یک میزبان لینوکسی همیشه‌روشن لازم است
+
+## اجرای نمونهٔ خط‌فرمان
+
+در PowerShell، از پوشهٔ اصلی مخزن:
 
 ```powershell
 python faran.py seed
@@ -12,13 +43,86 @@ python faran.py run
 python faran.py status
 ```
 
-State is stored in `.faran/state.json`. The sample run is deterministic and idempotent by task ID. It represents a synthetic hardening course, synthetic enrollment, offline fixture exercise, zero mock cost, and independent deterministic evaluation. It does not perform a real scan or establish production recovery, scheduling, concurrency, or Paperclip integration.
+`seed` مجموعهٔ مصنوعی تکرارپذیر را می‌سازد، `run` یک گردش‌کار نمونه را اجرا و ثبت می‌کند، و `status` خلاصهٔ وضعیت/ارزیابی را چاپ می‌کند. فایل وضعیت در `.faran/state.json` قرار می‌گیرد و جزو مخزن عمومی نیست. شناسهٔ تکراریِ همان تسک دوباره اثر جانبی ایجاد نمی‌کند.
 
-See [docs/ROADMAP.md](docs/ROADMAP.md) for acceptance and next steps.
+## اجرای داشبورد وب
 
-## PWA and Android
+```powershell
+python -m http.server 8000
+```
 
-The Persian RTL dashboard is served from the repository root for Vercel. It includes an installable web manifest, an offline shell cache, and a mock workflow that saves demo state in browser local storage. Native Android wrapper is generated with Capacitor 8; run `npm ci`, `npm run android:sync`, then open `android/` in Android Studio. The Android wrapper requires Android SDK/Gradle tooling to produce an APK. UI workflow state is browser-local and does not sync across devices.
+سپس `http://localhost:8000` را باز کنید. در نوار کناری بین نمای کلی، ساختار سازمانی، ایجنت‌ها، درس‌ها، مأموریت‌ها، اجراها و دربارهٔ پروژه جابه‌جا شوید. دکمهٔ «اجرای گردش‌کار نمونه» فقط fixture محلی را اجرا می‌کند. در صفحهٔ گزارش، رویدادهای پاک‌سازی‌شده را به JSON صادر و در ارزیاب بارگذاری کنید.
 
+دادهٔ رابط وب در مرورگر فعلی ذخیره می‌شود. برای پاک‌کردن وضعیت نمونه، دادهٔ سایت محلی را از تنظیمات مرورگر حذف کنید. روی دستگاه دیگری همین تاریخچه در دسترس نیست، زیرا backend یا پایگاه دادهٔ مشترک هنوز پیاده‌سازی نشده است.
 
-ارزیاب مستقل در مخزن [dr-soleimani-evaluator](https://github.com/maddixmhn/dr-soleimani-evaluator) توسعه می‌یابد و با فایل JSON پالایش‌شدهٔ قرارداد v1 تبادل می‌کند.
+## ساخت نسخهٔ اندروید
+
+```powershell
+npm ci
+npm run android:sync
+cd android
+.\gradlew.bat assembleDebug
+```
+
+APK آزمایشی پس از ساخت در مسیر `android/app/build/outputs/apk/debug/` قرار می‌گیرد. برای بازکردن پروژه در Android Studio:
+
+```powershell
+npm run android:open
+```
+
+پوشهٔ `www/` خروجیِ کپی‌شده برای Capacitor است و در Git نگهداری نمی‌شود؛ دستور `android:sync` آن را از فایل‌های وب اصلی می‌سازد و پروژهٔ Android را همگام می‌کند. بستهٔ نهایی امضاشده و انتشار در فروشگاه، جداگانه نیازمند کلید امضای مالک است.
+
+## اجرای Paperclip و n8n
+
+برای افزودن سامانهٔ آموزش، [نصب محلی Moodle](docs/LMS-LOCAL.md) را ببینید. میانبر Moodle در پنل محلی فاران نمایش داده می‌شود.
+
+فایل‌های Compose، نمونهٔ ورک‌فلو و راهنمای اپراتوری در [`infra/workflow/README.md`](infra/workflow/README.md) قرار دارند. پنل‌های Docker در محیط محلی فقط روی `127.0.0.1` منتشر می‌شوند: دانشگاه `http://localhost:8000` و ارزیاب `http://localhost:8001`. ورک‌فلوها دستی و فقط‌خواندنی‌اند و زمان‌بندی/اجرای عامل را فعال نمی‌کنند.
+
+چهار نمودار دستی و فقط‌خواندنی سلامت Paperclip، فهرست نقش‌ها، snapshot ترکیبی و پایش تسک در n8n اجراهای موفق ثبت‌شده دارند. نمودار پنجم برای پالایش تاریخچهٔ اجرا و ساخت feed ارزیاب به‌صورت غیرفعال وارد شده است؛ اجرای آن از UI n8n هنوز انجام نشده. پاسخ nodeهای HTTP در تاریخچهٔ n8n همین sandbox می‌ماند؛ فقط دادهٔ آزمایشی بدهید و آن را روی اینترنت منتشر نکنید. چهار درخواست جذب در Paperclip هنوز منتظر تأیید انسانی‌اند؛ heartbeat و بودجه صفر است و هیچ عامل فعالی نداریم. Paperclip با CLI رسمی و ذخیرهٔ محلی اجرا می‌شود؛ Docker محلی n8n از پایگاه دادهٔ پایدار استفاده می‌کند. برای جلوگیری از تماس‌های اختیاری خروجی، ماژول MCP، قالب‌ها، اعلان نسخه و diagnostics در n8n خاموش‌اند. Task Scheduler حساب فعلی را هنگام ورود به ویندوز راه‌اندازی می‌کند، نه در زمان خاموشی یا بدون ورود کاربر. رجیستری این میزبان pull n8n `2.48.7` را با 403 رد کرد و pull ایمیج Paperclip هنوز تکمیل نشده است؛ بنابراین سرویس Paperclip همچنان CLI میزبان است و اجرای Docker تولیدی نداریم. برای ۲۴/۷ به VPS لینوکسی پایدار و فضای ذخیره‌سازی نیاز است؛ دامنه و در صورت استفاده Cloudflare Tunnel/Access فقط مسیر دسترسی امن را فراهم می‌کند. Vercel میزبان فرایند دائمی Paperclip/n8n نیست.
+
+فایل واقعی `infra/workflow/.env` و داده‌های `infra/workflow/data/` نباید به GitHub ارسال شوند. زمان‌بندی فقط پس از تعیین ارائه‌دهندهٔ مدل، اعتبارنامه، سقف هزینه، تعداد اجرای هم‌زمان، منطقهٔ زمانی و برنامهٔ توقف/بازیابی فعال می‌شود.
+
+## استقرار نسخهٔ وب
+
+این مخزن به‌صورت سایت ایستا در Vercel قابل انتشار است:
+
+1. مخزن عمومی را در Vercel وارد کنید.
+2. Framework Preset را روی **Other** و پوشهٔ خروجی را روی ریشهٔ مخزن قرار دهید.
+3. برای داشبورد ایستا دستور build لازم نیست؛ فایل‌های `index.html`، `app.js`، `site.css`، manifest و Service Worker سرو می‌شوند.
+4. بعد از استقرار، صفحهٔ اصلی، پیوندهای مستندات، نصب PWA و رفتار Service Worker را بررسی کنید.
+
+این استقرار فایل‌های وب را میزبانی می‌کند؛ Python CLI یا سرویس‌های دائمی workflow را اجرا نمی‌کند.
+
+## ساختار مخزن
+
+```text
+faran.py                     نمونهٔ خط‌فرمان و وضعیت محلی
+index.html / app.js          رابط PWA راست‌چین
+site.css                     سبک و واکنش‌گرایی
+manifest.webmanifest         فرادادهٔ نصب PWA
+sw.js                        پوستهٔ آفلاین PWA
+android/                     پوستهٔ Capacitor برای Android
+docs/                        نقشه، پژوهش، مقاله و وضعیت فازها
+infra/workflow/               Compose، نمونهٔ n8n و runbook
+```
+
+## مستندات و مقاله
+
+- [نقشهٔ اجرایی دو محصول](docs/PROJECT-PLAN.md)
+- [نقشهٔ فنی دانشگاه](docs/ROADMAP.md)
+- [مبانی پژوهش](docs/RESEARCH.md)
+- [مقالهٔ طراحی دانشگاه ایجنتیک](docs/ARTICLE.md)
+- [معماری محیط ورک‌فلو](docs/WORKFLOW-ARCHITECTURE.md)
+- [درصد فازهای Paperclip/n8n](docs/WORKFLOW-ROADMAP.md)
+- [راهنمای اجرای سرویس‌ها](infra/workflow/README.md)
+
+مقاله یک گزارش طراحی و نمونهٔ نرم‌افزاری است، نه نتیجهٔ آزمایش دانشگاه واقعی. پیش از تحویل، دانشجو باید منابع اولیه، املای رسمی نام‌ها، دستورالعمل استاد و هر الزام اعلام نحوهٔ استفاده از ابزارهای کمکی را بررسی کند.
+
+## مجوز
+
+کد این مخزن تحت [MIT License](LICENSE) منتشر می‌شود. مجوز وابستگی‌ها و سرویس‌های بیرونی تابع شرایط خودشان است.
+
+## ارائه و دسترسی
+
+[سامانه](https://faran-mu.vercel.app/) · [ارائهٔ درسی و نسخهٔ چاپی](https://faran-mu.vercel.app/docs/seminar.html) · [مقاله](docs/ARTICLE.md) · [کد پروژه](https://github.com/maddixmhn/faran)
+گراف ایستای پنج فایل هستهٔ دو پروژه با Graphify شامل ۵۰ گره، ۷۱ رابطه و ۹ اجتماع است. برای سرویس خلاصهٔ اجرا نمادی استخراج نشد. [دادهٔ گراف](docs/code-graph.json)

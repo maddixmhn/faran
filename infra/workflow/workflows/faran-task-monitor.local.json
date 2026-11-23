@@ -1,0 +1,87 @@
+{
+  "name": "Faran · پایش تسک‌های Paperclip · local manual read-only",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "62fa58a3-8b52-46a4-9bd2-f69ef948423b",
+      "name": "Manual start",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://host.docker.internal:3100/api/companies/15af0af3-1b60-4bbb-8dc3-f969c2206ea4/issues?limit=25&sortField=updated&sortDir=desc",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "timeout": 8000
+        }
+      },
+      "id": "754a1543-f7f3-443d-a791-e0f8a63dbddb",
+      "name": "Read recent Paperclip tasks",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [520, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "c8a0394e-0d78-4f0d-9d42-18b74da6719a",
+          "name": "Faran Paperclip Local Observer"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "http://host.docker.internal:3100/api/companies/15af0af3-1b60-4bbb-8dc3-f969c2206ea4/live-runs",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "timeout": 8000
+        }
+      },
+      "id": "239ce2eb-65f5-4bbf-a291-13604bb62452",
+      "name": "Read active Paperclip runs",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [520, 520],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "c8a0394e-0d78-4f0d-9d42-18b74da6719a",
+          "name": "Faran Paperclip Local Observer"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const issueRows = $('Read recent Paperclip tasks').all().map(({ json }) => json);\nconst runRows = $('Read active Paperclip runs').all().map(({ json }) => json);\nconst issues = issueRows.flatMap((row) => Array.isArray(row) ? row : (Array.isArray(row.issues) ? row.issues : [row.issue ?? row]));\nconst runs = runRows.flatMap((row) => Array.isArray(row) ? row : (Array.isArray(row.runs) ? row.runs : [row.run ?? row]));\nif (issues.some((item) => typeof item !== 'object' || item === null) || runs.some((item) => typeof item !== 'object' || item === null)) throw new Error('Paperclip returned an unexpected task or run list.');\nconst safeRuns = runs.filter((run) => run.id || run.runId).map((run) => ({\n  id: String(run.id ?? run.runId),\n  issueId: run.issueId ? String(run.issueId) : null,\n  agentId: run.agentId ? String(run.agentId) : null,\n  status: String(run.status ?? 'unknown'),\n  startedAt: run.startedAt ?? null,\n  endedAt: run.endedAt ?? run.finishedAt ?? null,\n}));\nconst safeTasks = issues.filter((issue) => issue.id || issue.identifier).map((issue) => {\n  const id = String(issue.id ?? '');\n  return {\n    id,\n    identifier: String(issue.identifier ?? ''),\n    title: String(issue.title ?? 'بدون عنوان').slice(0, 240),\n    status: String(issue.status ?? 'unknown'),\n    priority: String(issue.priority ?? 'unknown'),\n    assigneeAgentId: issue.assigneeAgentId ? String(issue.assigneeAgentId) : null,\n    projectId: issue.projectId ? String(issue.projectId) : null,\n    createdAt: issue.createdAt ?? null,\n    updatedAt: issue.updatedAt ?? null,\n    activeRuns: safeRuns.filter((run) => run.issueId === id),\n  };\n});\nreturn [{ json: { source: 'paperclip', companyId: '15af0af3-1b60-4bbb-8dc3-f969c2206ea4', n8nExecutionId: String($execution.id), observedAt: new Date().toISOString(), taskCount: safeTasks.length, activeRunCount: safeRuns.length, tasks: safeTasks, changesMade: false, agentRunsStarted: false } }];"
+      },
+      "id": "ef1be679-27b2-4616-aebd-2b75185b716a",
+      "name": "Sanitize task status",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [840, 410]
+    }
+  ],
+  "connections": {
+    "Manual start": {
+      "main": [[{"node": "Read recent Paperclip tasks", "type": "main", "index": 0}, {"node": "Read active Paperclip runs", "type": "main", "index": 0}]]
+    },
+    "Read recent Paperclip tasks": {
+      "main": [[{"node": "Sanitize task status", "type": "main", "index": 0}]]
+    },
+    "Read active Paperclip runs": {
+      "main": [[{"node": "Sanitize task status", "type": "main", "index": 0}]]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "9b25aa5c-0790-4a99-baa3-8e5aa69459f3",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "tags": [],
+  "id": "QvBq5eXxU2sc0ABk"
+}
