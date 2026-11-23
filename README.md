@@ -126,3 +126,7 @@ infra/workflow/               Compose، نمونهٔ n8n و runbook
 
 [سامانه](https://faran-mu.vercel.app/) · [ارائهٔ درسی و نسخهٔ چاپی](https://faran-mu.vercel.app/docs/seminar.html) · [مقاله](docs/ARTICLE.md) · [کد پروژه](https://github.com/maddixmhn/faran)
 گراف ایستای پنج فایل هستهٔ دو پروژه با Graphify شامل ۵۰ گره، ۷۱ رابطه و ۹ اجتماع است. برای سرویس خلاصهٔ اجرا نمادی استخراج نشد. [دادهٔ گراف](docs/code-graph.json)
+
+## انتشار روی Cloudflare Pages
+
+در Pages مخزن همین پروژه را متصل کنید. دستور ساخت `python3 scripts/build_pages.py` و پوشهٔ خروجی `pages-dist` است. این بسته شامل داشبورد، مقاله و ارائهٔ درسی است. برای سرویس‌های محلی دانشگاه، میزبان پایدار و مسیر احراز هویت جداگانه لازم است.
