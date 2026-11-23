@@ -12,3 +12,4 @@ docs/*
 !docs/*.md
 !docs/seminar.html
 !docs/code-graph.json
+!docs/article.html
