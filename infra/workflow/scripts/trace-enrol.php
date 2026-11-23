@@ -1,0 +1,21 @@
+<?php
+define('CLI_SCRIPT', true);
+$start = (int) round(microtime(true)*1000);
+require '/var/www/html/config.php';
+require_once $CFG->dirroot.'/user/lib.php';
+[$script,$trace,$major] = $argv;
+if (!preg_match('/^[0-9a-f-]{36}$/D',$trace)) throw new RuntimeException('Invalid trace');
+$course = $DB->get_record('course',['shortname'=>'FARAN-DEMO-'.substr(hash('sha256',$major),0,10)],'*',MUST_EXIST);
+$tx=$DB->start_delegated_transaction();
+$name='faran-trace-'.$trace;
+$user=$DB->get_record('user',['username'=>$name,'mnethostid'=>$CFG->mnet_localhost_id]);
+if ($user && ($user->auth !== 'nologin' || $user->idnumber !== $trace)) throw new RuntimeException('Identity conflict');
+$id=$user ? $user->id : user_create_user((object)['username'=>$name,'idnumber'=>$trace,'auth'=>'nologin','mnethostid'=>$CFG->mnet_localhost_id,'confirmed'=>1,'firstname'=>'Trace','lastname'=>'Sandbox','email'=>$name.'@example.invalid'],false);
+$instances=array_filter(enrol_get_instances($course->id,true),fn($i)=>$i->enrol==='manual');
+$instance=reset($instances);
+if (!$instance) throw new RuntimeException('Missing enrolment instance');
+$role=$DB->get_field('role','id',['shortname'=>'student'],MUST_EXIST);
+enrol_get_plugin('manual')->enrol_user($instance,$id,$role);
+if (!is_enrolled(context_course::instance($course->id),$id,'',true)) throw new RuntimeException('Enrolment failed');
+$tx->allow_commit();
+echo json_encode(['trace'=>$trace,'course'=>(int)$course->id,'verified'=>true,'start'=>$start,'end'=>(int)round(microtime(true)*1000)]);

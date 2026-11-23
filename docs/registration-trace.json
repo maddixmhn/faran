@@ -1,0 +1,86 @@
+{
+  "task_id": "b2141833-686e-4d3d-a2b6-f080c720fa30",
+  "n8n_execution": "20",
+  "moodle_course": 4,
+  "verified": true,
+  "stages": [
+    {
+      "name": "Paperclip",
+      "submitted": 1795462333702,
+      "started": 1795462333790,
+      "ended": 1795462336236,
+      "wait_ms": 88,
+      "service_ms": 2446
+    },
+    {
+      "name": "n8n",
+      "submitted": 1795462338592,
+      "started": 1795462353128,
+      "ended": 1795462355745,
+      "wait_ms": 14536,
+      "service_ms": 2617
+    },
+    {
+      "name": "Moodle",
+      "submitted": 1795462355939,
+      "started": 1795462356112,
+      "ended": 1795462362335,
+      "wait_ms": 173,
+      "service_ms": 6223
+    }
+  ],
+  "analysis": {
+    "task_id": "b2141833-686e-4d3d-a2b6-f080c720fa30",
+    "elapsed_ms": 28633,
+    "parts": [
+      {
+        "stage": "Paperclip",
+        "kind": "dispatch-to-start",
+        "ms": 88
+      },
+      {
+        "stage": "Paperclip",
+        "kind": "service",
+        "ms": 2446
+      },
+      {
+        "from": "Paperclip",
+        "to": "n8n",
+        "kind": "handoff",
+        "ms": 2356
+      },
+      {
+        "stage": "n8n",
+        "kind": "dispatch-to-start",
+        "ms": 14536
+      },
+      {
+        "stage": "n8n",
+        "kind": "service",
+        "ms": 2617
+      },
+      {
+        "from": "n8n",
+        "to": "Moodle",
+        "kind": "handoff",
+        "ms": 194
+      },
+      {
+        "stage": "Moodle",
+        "kind": "dispatch-to-start",
+        "ms": 173
+      },
+      {
+        "stage": "Moodle",
+        "kind": "service",
+        "ms": 6223
+      }
+    ],
+    "largest": {
+      "stage": "n8n",
+      "kind": "dispatch-to-start",
+      "ms": 14536
+    },
+    "share": 0.5076659798135019
+  }
+}

@@ -13,3 +13,5 @@ docs/*
 !docs/seminar.html
 !docs/code-graph.json
 !docs/article.html
+
+!docs/registration-trace.json
