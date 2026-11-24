@@ -31,6 +31,7 @@ pages.append(page('نتایج مقایسهٔ صف و اجرا',table(['مسیر'
 pages.append(page('راستی‌آزمایی رقابت برای آخرین صندلی',table(['درخواست','اجرای n8n','عضویت مبدأ','عضویت مقصد'],[(r['request_id'],r['execution'],r['origin'],r['target']) for r in race['requests']])+'<p>قفل ردیف مقصد، بررسی ظرفیت و اعمال عضویت را در یک تراکنش هماهنگ می‌کند. بازخوانی جداگانه پس از پایان هر دو تراکنش یک عضویت در مقصد نشان داد.</p>'))
 pages.append(page('منابع علمی و فنی','<ol><li>Little, J. D. C. (1961). A Proof for the Queuing Formula L = λW. Operations Research, 9(3), 383–387. <bdi>doi:10.1287/opre.9.3.383</bdi>. کاربرد در پژوهش، تفکیک مرز صف از کل سامانه و لزوم اندازه‌گیری هم‌زمان نرخ ورود و جمعیت صف است.</li><li>Lamport, L. (1978). Time, Clocks, and the Ordering of Events in a Distributed System. Communications of the ACM, 21(7), 558–565. <bdi>doi:10.1145/359545.359563</bdi>. تقدم علّی با شناسهٔ درخواست و مدارک تحویل تفسیر می‌شود.</li><li>n8n، راهنمای رسمی Queue mode، برای معماری worker و Redis.</li><li>Moodle Developer Resources، Group API، برای خواندن عضویت و عملیات گروه.</li></ol>'))
 pages.append(page('کنسول عامل‌های Paperclip',fig('paperclip-console.png','تصویر مستقیم کنسول محلی و چهار نقش مدیریتی آزمایشی')))
+pages.append(page('اجرای موفق گردش‌کار نیمسال در n8n',fig('n8n-execution-19.jpg','اسکرین‌شات مستقیم n8n؛ اجرای موفق شمارهٔ ۱۹ در ۸٫۳۲۴ ثانیه و نمودار پنج‌گرهی نیمسال')))
 for index,s in enumerate(roster,1):
  r=receipts.get(s['id'],{})
  keys=[('major','رشته'),('group','شمارهٔ گروه'),('instructor','نقش مدرس')]
