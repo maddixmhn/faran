@@ -6,6 +6,19 @@
 
 </div>
 
+## برنامهٔ Android
+
+فایل APK امضاشده به همراه SHA-256 در [GitHub Releases](https://github.com/maddixmhn/faran/releases) قرار می‌گیرد. برای ساخت از کد، Node.js 22، JDK 21 و Android SDK 36 نیاز است. حداقل نسخهٔ نصب Android 7.0 است.
+
+```bash
+npm ci
+npm run android:sync
+cd android
+bash gradlew assembleRelease
+```
+
+خروجی این فرمان APK بدون امضا است. بستهٔ منتشرشده از بخش Releases امضا دارد. مقاله و دادهٔ نمونه داخل بسته هستند. امکانات نمایشی با دادهٔ ساختگی اجرا می‌شوند. سرویس‌های محلی Moodle، Paperclip و n8n روی دستگاه میزبان اجرا می‌شوند. راه‌اندازی آن‌ها در راهنمای فارسی آمده است.
+
 ## شروع سریع
 
 پس از دریافت مخزن و روشن‌کردن Docker، در ریشهٔ پروژه اجرا کن:

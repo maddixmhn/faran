@@ -1,0 +1,44 @@
+name: Android APK
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+    paths:
+      - .github/workflows/android.yml
+      - android/**
+      - android-documents.js
+      - app.js
+      - copy-web.mjs
+      - package-lock.json
+      - capacitor.config.json
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - name: Install Android platform
+        run: sdkmanager "platforms;android-36" "build-tools;36.0.0"
+      - run: npm ci
+      - run: npm test --if-present
+      - run: npm run android:sync
+      - name: Assemble unsigned release
+        working-directory: android
+        run: bash gradlew --no-daemon --console=plain assembleRelease
+      - uses: actions/upload-artifact@v4
+        with:
+          name: org.faran.university-unsigned
+          path: android/app/build/outputs/apk/release/app-release-unsigned.apk
+          if-no-files-found: error
