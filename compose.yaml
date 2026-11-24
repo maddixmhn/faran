@@ -147,7 +147,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 24
-      start_period: 90s
+      start_period: 12m
 
   moodle-db:
     image: postgres:17-alpine

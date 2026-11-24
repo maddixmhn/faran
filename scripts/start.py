@@ -46,7 +46,7 @@ def main():
     base = ["docker", "compose", "--project-name", args.project,
             "--env-file", str(envfile), "-f", str(ROOT / "compose.yaml")]
     if args.action == "up":
-        subprocess.run(base + ["up", "-d", "--build", "--wait", "--wait-timeout", "600"], cwd=ROOT, check=True)
+        subprocess.run(base + ["up", "-d", "--build", "--wait", "--wait-timeout", "1200"], cwd=ROOT, check=True)
         for key, default, name, route in PORTS:
             print(f"{name}: http://localhost:{os.environ.get(key, default)}{route}")
         print("Moodle admin password is stored in", envfile)
