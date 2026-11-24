@@ -24,3 +24,6 @@ docs/*
 
 !docs/execution-evidence.png
 !docs/execution-evidence.json
+
+!docs/faculty-home.png
+!docs/faculty-semester.png
