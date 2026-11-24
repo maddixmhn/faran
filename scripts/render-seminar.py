@@ -32,6 +32,7 @@ pages.append(page('راستی‌آزمایی رقابت برای آخرین صن
 pages.append(page('منابع علمی و فنی','<ol><li>Little, J. D. C. (1961). A Proof for the Queuing Formula L = λW. Operations Research, 9(3), 383–387. <bdi>doi:10.1287/opre.9.3.383</bdi>. کاربرد در پژوهش، تفکیک مرز صف از کل سامانه و لزوم اندازه‌گیری هم‌زمان نرخ ورود و جمعیت صف است.</li><li>Lamport, L. (1978). Time, Clocks, and the Ordering of Events in a Distributed System. Communications of the ACM, 21(7), 558–565. <bdi>doi:10.1145/359545.359563</bdi>. تقدم علّی با شناسهٔ درخواست و مدارک تحویل تفسیر می‌شود.</li><li>n8n، راهنمای رسمی Queue mode، برای معماری worker و Redis.</li><li>Moodle Developer Resources، Group API، برای خواندن عضویت و عملیات گروه.</li></ol>'))
 pages.append(page('کنسول عامل‌های Paperclip',fig('paperclip-console.png','تصویر مستقیم کنسول محلی و چهار نقش مدیریتی آزمایشی')))
 pages.append(page('اجرای موفق گردش‌کار نیمسال در n8n',fig('n8n-execution-19.jpg','اسکرین‌شات مستقیم n8n؛ اجرای موفق شمارهٔ ۱۹ در ۸٫۳۲۴ ثانیه و نمودار پنج‌گرهی نیمسال')))
+pages.append(page('کانتینرهای روشن در Docker Desktop',fig('docker-desktop.jpg','نمای مستقیم Docker Desktop؛ چراغ سبز کنار ردیف‌ها نشان می‌دهد کانتینرهای n8n، Moodle، پایگاه‌های داده و داشبوردها هنگام ثبت تصویر در حال اجرا بودند.')))
 for index,s in enumerate(roster,1):
  r=receipts.get(s['id'],{})
  keys=[('major','رشته'),('group','شمارهٔ گروه'),('instructor','نقش مدرس')]
