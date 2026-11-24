@@ -1,0 +1,18 @@
+{
+  "trace": "a61e020d-af8e-4fbf-ac5a-848bc32573f4",
+  "execution": "2012",
+  "course": 4,
+  "verified": true,
+  "containers": [
+    "faranbench3719b918worker Up 13 minutes",
+    "faranbench3719b918main Up 13 minutes",
+    "faranbench3719b918redis Up 13 minutes",
+    "faran-workflow-faran-web-1 Up 14 minutes (healthy)",
+    "faran-workflow-evaluator-web-1 Up 14 minutes (healthy)",
+    "faran-workflow-runtime-summary-1 Up 14 minutes",
+    "faran-lms-lms-1 Up 13 minutes",
+    "faran-lms-db-1 Up 13 minutes (healthy)",
+    "faran-workflow-n8n-1 Up 14 minutes (healthy)",
+    "faran-workflow-n8n-db-1 Up 14 minutes (healthy)"
+  ]
+}

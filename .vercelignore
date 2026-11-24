@@ -21,3 +21,6 @@ docs/*
 
 !dashboard.html
 !login.html
+
+!docs/execution-evidence.png
+!docs/execution-evidence.json
