@@ -1,51 +1,215 @@
+"""Render the seminar manuscript and its compact evidence appendix as an A4 PDF."""
+
+from collections import Counter
 from pathlib import Path
-import html,json,re,collections
+from statistics import median
+from tempfile import TemporaryDirectory
+import argparse
+import html
+import json
+import os
+import re
+import subprocess
+
 from pypdf import PdfReader
-import os,subprocess
 
-d=Path('docs').resolve()
-data=Path('infra/workflow/data/semester')
-def load(p): return json.loads(p.read_text(encoding='utf-8-sig'))
-roster=load(data/'roster.json')['students']
-receipts={x['id']:x for x in load(data/'enrolled.json')}
-queue=load(data/'public/queue-comparison.json')
-race=load(data/'public/seat-race.json')
-esc=lambda x:html.escape(str(x))
-def table(headers,rows):
- return '<table><thead><tr>'+''.join(f'<th>{esc(x)}</th>' for x in headers)+'</tr></thead><tbody>'+''.join('<tr>'+''.join(f'<td><bdi>{esc(x)}</bdi></td>' for x in r)+'</tr>' for r in rows)+'</tbody></table>'
-def page(title,body): return f'<section><h2>{title}</h2>{body}</section>'
-def fig(name,label): return f'<figure><img src="{name}" alt="{label}"><figcaption>{label}</figcaption></figure>'
-pages=[page('گزارش سمینار دانشگاه دیجیتال فاران','<h1>طراحی و ارزیابی گردش‌کار آموزشی چندعاملی</h1><p>محمد مهرانی · استاد درس سمینار دکتر سعید شکراللهی</p><h3>راهنمای مطالعه</h3><p>بدنهٔ گزارش، روش و نتایج آزمایش را توضیح می‌دهد. پیوست، صد برگهٔ مستقل برای تطبیق برنامهٔ ثبت‌نام با رسید Moodle دارد. پرونده‌ها ساختگی‌اند و بازتاب تصمیم‌های آموزشی دانشگاه واقعی نیستند.</p>')]
-for block in re.split(r'^## ',(d/'SEMINAR-MANUSCRIPT.md').read_text(encoding='utf-8-sig'),flags=re.M)[1:]:
- title,_,body=block.partition('\n')
- content=[]
- for text in body.strip().split('\n\n'):
-  m=re.fullmatch(r'!?\[([^]]+)\]\(([^)]+)\)',text.strip())
-  if m and text.startswith('!'):content.append(fig(m[2],m[1]))
-  elif m:content.append(f'<p>سند همراه <bdi>{esc(m[2])}</bdi></p>')
-  else:content.append('<p>'+esc(text)+'</p>')
- pages.append(page(esc(title),''.join(content)))
-counts=collections.Counter(s['major'] for s in roster)
-pages.append(page('نتایج ثبت‌نام در رشته‌ها',table(['رشته','تعداد در برنامه','تعداد رسید منطبق'],[(m,n,sum(s['major']==m and all(receipts.get(s['id'],{}).get(k)==s[k] for k in ('major','group','instructor')) for s in roster)) for m,n in counts.items()])+'<p>تطبیق بر سه فیلد رشته، گروه و مدرس انجام شده است. نتیجه از خروجی ذخیره‌شده گرفته شد و وضعیت امروزی Moodle را اندازه نمی‌گیرد.</p>'))
-pages.append(page('نتایج مقایسهٔ صف و اجرا',table(['مسیر','اجرا','تحویل تا گره (ms)','صف Redis (ms)'],[(r['mode'],r['execution'],r['dispatch_ms'],r['redis_queue_ms'] if r['redis_queue_ms'] is not None else 'خارج از مسیر Redis') for r in queue['registrations']])+'<p>اجرای گرم‌کردن در جدول هست و در میانه‌ها لحاظ نشده است. میانه‌های ثبت‌شده برای CLI و worker به ترتیب ۴۶۹۳۷ و ۴۸۱۱ میلی‌ثانیه‌اند. نمونه‌ها اندک و بار ورودی تک‌درخواستی بود.</p>'))
-pages.append(page('راستی‌آزمایی رقابت برای آخرین صندلی',table(['درخواست','اجرای n8n','عضویت مبدأ','عضویت مقصد'],[(r['request_id'],r['execution'],r['origin'],r['target']) for r in race['requests']])+'<p>قفل ردیف مقصد، بررسی ظرفیت و اعمال عضویت را در یک تراکنش هماهنگ می‌کند. بازخوانی جداگانه پس از پایان هر دو تراکنش یک عضویت در مقصد نشان داد.</p>'))
-pages.append(page('منابع علمی و فنی','<ol><li>Little, J. D. C. (1961). A Proof for the Queuing Formula L = λW. Operations Research, 9(3), 383–387. <bdi>doi:10.1287/opre.9.3.383</bdi>. کاربرد در پژوهش، تفکیک مرز صف از کل سامانه و لزوم اندازه‌گیری هم‌زمان نرخ ورود و جمعیت صف است.</li><li>Lamport, L. (1978). Time, Clocks, and the Ordering of Events in a Distributed System. Communications of the ACM, 21(7), 558–565. <bdi>doi:10.1145/359545.359563</bdi>. تقدم علّی با شناسهٔ درخواست و مدارک تحویل تفسیر می‌شود.</li><li>n8n، راهنمای رسمی Queue mode، برای معماری worker و Redis.</li><li>Moodle Developer Resources، Group API، برای خواندن عضویت و عملیات گروه.</li></ol>'))
-pages.append(page('کنسول عامل‌های Paperclip',fig('paperclip-console.png','تصویر مستقیم کنسول محلی و چهار نقش مدیریتی آزمایشی')))
-pages.append(page('اجرای موفق گردش‌کار نیمسال در n8n',fig('n8n-execution-19.jpg','اسکرین‌شات مستقیم n8n؛ اجرای موفق شمارهٔ ۱۹ در ۸٫۳۲۴ ثانیه و نمودار پنج‌گرهی نیمسال')))
-pages.append(page('کانتینرهای روشن در Docker Desktop',fig('docker-desktop.jpg','نمای مستقیم Docker Desktop؛ چراغ سبز کنار ردیف‌ها نشان می‌دهد کانتینرهای n8n، Moodle، پایگاه‌های داده و داشبوردها هنگام ثبت تصویر در حال اجرا بودند.')))
-for index,s in enumerate(roster,1):
- r=receipts.get(s['id'],{})
- keys=[('major','رشته'),('group','شمارهٔ گروه'),('instructor','نقش مدرس')]
- matches=all(s[k]==r.get(k) for k,_ in keys)
- body=f'<p>پروندهٔ ساختگی <bdi>{esc(s["id"])}</bdi> · برگهٔ {index} از {len(roster)}</p>'
- body+=table(['فیلد','برنامهٔ نیمسال','رسید Moodle'],[(label,s[k],r.get(k,'ثبت نشده')) for k,label in keys])
- body+=f'<p>درس Moodle <bdi>{esc(r.get("courseid","—"))}</bdi> · گروه Moodle <bdi>{esc(r.get("groupid","—"))}</bdi></p><h3>نتیجهٔ آزمون انطباق</h3><p>{"سه فیلد برنامه با رسید هم‌خوان است." if matches else "اختلاف در رسید شناسایی شد."} شمارهٔ گروه داخلی Moodle با شمارهٔ گروه در برنامه دو شناسهٔ متفاوت است.</p>'
- pages.append(page('پیوست تطبیق پروندهٔ ثبت‌نام',body))
-document='<!doctype html><html lang="fa" dir="rtl"><meta charset="utf-8"><title>سمینار فاران</title><style>@page{size:A4;margin:18mm}body{font:15px/1.95 Tahoma,Arial;color:#18352f}section{break-after:page}section:last-child{break-after:auto}h2{border-bottom:2px solid #176952;padding-bottom:8px}h1{font-size:35px}figure{margin:10px;text-align:center;break-inside:avoid}img{max-width:95%;max-height:85mm}table{border-collapse:collapse;width:100%}td,th{border:1px solid #a9beb8;padding:7px;text-align:start}th{background:#e3efeb}</style>'+''.join(pages)+'</html>'
-tmp=d/'SEMINAR-PRINT.html';tmp.write_text(document,encoding='utf8')
-pdf=d/'faran-seminar.pdf'
-subprocess.run([r'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe','--headless','--disable-gpu',f'--user-data-dir={os.environ["TEMP"]}/seminar-print',f'--print-to-pdf={pdf}',tmp.as_uri()],timeout=90,check=True)
-reader=PdfReader(pdf)
-assert len(reader.pages)>=100
-print('PDF pages',len(reader.pages),'size',pdf.stat().st_size)
+DOCS = Path(__file__).resolve().parents[1] / "docs"
+EDGE = Path(r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe")
+REFERENCES = [
+    ("Little, J. D. C. (1961). A Proof for the Queuing Formula L = λW. Operations Research 9(3), 383–387.",
+     "https://doi.org/10.1287/opre.9.3.383"),
+    ("Lamport, L. (1978). Time, Clocks, and the Ordering of Events in a Distributed System. Communications of the ACM 21(7), 558–565.",
+     "https://lamport.org/pubs/time-clocks.pdf"),
+    ("Van der Aalst, W. et al. (2012). Process Mining Manifesto. Business Process Management Workshops, LNCS 773, 169–194.",
+     "https://doi.org/10.1007/978-3-642-28108-2_19"),
+    ("Ewaschuk, R. (2016). Monitoring Distributed Systems. In Site Reliability Engineering.",
+     "https://sre.google/sre-book/monitoring-distributed-systems/"),
+    ("n8n Docs. Configuring queue mode.",
+     "https://docs.n8n.io/hosting/scaling/queue-mode/"),
+    ("Moodle Developer Resources. Enrolment API.",
+     "https://moodledev.io/docs/5.0/apis/subsystems/enrol"),
+    ("PostgreSQL documentation. Explicit Locking.",
+     "https://www.postgresql.org/docs/current/explicit-locking.html"),
+]
+IMAGE_NAMES = (
+    ("service-graph.svg", "معماری ثبت‌نام و مرز مسئولیت سرویس‌ها"),
+    ("semester-workflow.svg", "بازترسیم پنج گره از تعریف گردش‌کار نیمسال"),
+    ("paperclip-console.png", "نمای مستقیم چهار نقش مدیریتی آزمایشی در Paperclip"),
+    ("n8n-execution-19.jpg", "نمای مستقیم اجرای ۱۹ در n8n با وضعیت موفق و زمان ۸٫۳۲۴ ثانیه"),
+    ("docker-desktop.jpg", "نمای مستقیم کانتینرهای روشن در Docker Desktop هنگام ثبت تصویر"),
+    ("execution-evidence.png", "گزارش خروجی اجرای ۲۰۱۲ و تأیید عضویت فعال در درس ۴"),
+)
+STYLE = """
+@page {
+  size:A4; margin:19mm 17mm 20mm;
+  @bottom-center { content:"فاران · " counter(page) " / " counter(pages); font:9pt Tahoma,sans-serif; color:#395951 }
+}
+* { box-sizing:border-box }
+body { margin:0; font:11pt/1.9 Tahoma,Arial,sans-serif; color:#182e29 }
+p { margin:0 0 .72em; orphans:3; widows:3 }
+h1 { font-size:23pt; line-height:1.5; margin:.25em 0 .5em }
+h2 { font-size:15pt; line-height:1.6; margin:1.2em 0 .35em; border-bottom:1px solid #87a69b;
+     break-after:avoid }
+h3 { font-size:12pt; margin:1em 0 .3em; break-after:avoid }
+a { color:#185c49; overflow-wrap:anywhere }
+.byline { color:#395951; margin:0 0 1.25em; font-size:10.5pt }
+ol { padding-inline-start:1.4em }
+li { margin-block:.35em }
+figure { margin:10pt auto; break-inside:avoid; text-align:center }
+figure img { display:block; margin:auto; max-width:100%; max-height:115mm }
+figcaption { font-size:9.5pt; margin-top:4pt }
+table { border-collapse:collapse; width:100%; font-size:9pt; line-height:1.5; margin:.6em 0 1em }
+thead { display:table-header-group }
+tr { break-inside:avoid }
+td,th { border:1px solid #b2c5bf; text-align:start; padding:4px 5px; vertical-align:top }
+th { background:#e8f0ed }
+tbody tr:nth-child(even) { background:#f6faf8 }
+.bar { background:#d7eee5; border-inline-start:3px solid #176750; min-width:2%; height:11px; margin-block:2px }
+.annex { break-before:page }
+@media screen { body{max-width:820px;margin:auto;padding:18px} }
+"""
 
+def escape(value):
+    return html.escape(str(value))
+
+def table(headers, rows):
+    head = "".join(f"<th scope='col'>{escape(label)}</th>" for label in headers)
+    body = "".join(
+        "<tr>" + "".join(f"<td><bdi>{escape(value)}</bdi></td>" for value in row) + "</tr>"
+        for row in rows
+    )
+    return f"<table><thead><tr>{head}</tr></thead><tbody>{body}</tbody></table>"
+
+def manuscript():
+    source = (DOCS / "SEMINAR-MANUSCRIPT.md").read_text(encoding="utf-8-sig")
+    intro, *chapters = re.split(r"^## ", source, flags=re.M)
+    heading, *metadata = intro.strip().splitlines()
+    byline = " · ".join(line.replace("**", "").strip() for line in metadata if line.strip())
+    result = [f"<h1>{escape(heading[2:])}</h1><p class='byline'>{escape(byline)}</p>"]
+    for chapter in chapters:
+        title, _, body = chapter.partition("\n")
+        result.append(f"<h2>{escape(title.strip())}</h2>")
+        for paragraph in re.split(r"\n\s*\n", body.strip()):
+            result.append(f"<p>{escape(paragraph.replace('**',''))}</p>")
+    return "".join(result)
+
+def result_tables(evidence):
+    roster = evidence["roster"]
+    workers = evidence["worker_audit"]
+    queue = evidence["queue"]
+    stages = evidence["trace"]["stages"]
+    race = evidence["race"]
+    majors = Counter(row["major"] for row in roster)
+    verified = Counter(row["major"] for row in roster if row["membership_verified"])
+    managers = {"ceo":"مدیریت ارشد", "pm":"آموزش", "cto":"فناوری اطلاعات", "engineer":"مهندسی کامپیوتر"}
+    out = ["<h2>جدول‌های نتایج و شواهد محاسبات</h2>",
+           "<h3>تطبیق عضویت آزمایشی بر حسب رشته</h3>",
+           table(["رشته","پرونده در برنامه","عضویت گروه تأییدشده"],
+                 [(major, count, verified[major]) for major, count in majors.items()]),
+           "<p>تأیید عضویت از بازخوانی گروه و وضعیت فعال در Moodle به دست آمد. شناسه‌های پروندهٔ ساختگی و رسیدهای تطبیق در پیوست آمده‌اند.</p>",
+           "<h3>بازخوانی مستقل اجرای دسته‌ای از PostgreSQL</h3>",
+           table(["سنجه","مقدار"],[
+             ("گردش‌کار در نمونهٔ آزمایشی n8n",workers["workflow"]),
+             ("بازهٔ شناسهٔ اجرا",f"{workers['first_execution']}–{workers['last_execution']}"),
+             ("ردیف موفق مستقل در پایگاه داده",workers["successful_db_rows"]),
+             ("شناسهٔ اجرا منطبق با دفتر",workers["matched_ledger_rows"]),
+             ("شناسهٔ نقش متمایز در دفتر",workers["unique_roles"])]),
+           table(["شاخهٔ مدیریتی","نقش بررسی‌شده"],
+                 [(managers[key], count) for key,count in workers["managers"].items()]),
+           "<h3>تجزیهٔ زمانی اجرای ۲۰</h3>",
+           table(["مرحله","تحویل تا شروع (ms)","خدمت (ms)"],
+                 [(s["name"],s["wait_ms"],s["service_ms"]) for s in stages]),
+           "<p>فاصله‌های تحویل بین مراحل در جدول بالا نیامده‌اند. با افزودن ۲۳۵۶ و ۱۹۴ میلی‌ثانیه، جمع زمان سرتاسری به ۲۸۶۳۳ میلی‌ثانیه می‌رسد.</p>",
+           "<h3>مشاهدات مقایسهٔ مسیرهای اجرا</h3>",
+           table(["مسیر","شناسهٔ اجرا","تا نخستین گره (ms)","صف Redis (ms)","Moodle (ms)","عضو نمونه"],
+                 [(r["mode"],r["execution"],r["dispatch_ms"],
+                   "—" if r["redis_queue_ms"] is None else r["redis_queue_ms"],r["moodle_ms"],
+                   "گرم‌کردن" if r["trace"]==queue["excluded_warmup"] else "تحلیل")
+                  for r in queue["registrations"]])]
+    modes = []
+    for mode in ("cli","worker"):
+        values = [r["dispatch_ms"] for r in queue["registrations"]
+                  if r["mode"] == mode and r["trace"] != queue["excluded_warmup"]]
+        modes.append((mode,min(values),median(values),max(values)))
+    out += [table(["مسیر","کمینه (ms)","میانه (ms)","بیشینه (ms)"],modes),
+            "<figure><div>",
+            "".join(f'<div><bdi>{escape(mode)} · {middle:,} ms</bdi>'
+                    f'<div class="bar" style="width:{100*middle/max(middle_value for _, _, middle_value, _ in modes):.2f}%"></div></div>'
+                    for mode,_,middle,_ in modes),
+            "</div><figcaption>میانهٔ زمان تحویل تا اولین گره. طول میله نسبت به بزرگ‌ترین میانه در همین نمونه است.</figcaption></figure>",
+            "<h3>رقابت واقعی دو درخواست برای آخرین صندلی</h3>",
+            table(["شناسهٔ درخواست","اجرا","عضویت مبدأ","عضویت مقصد"],
+                  [(r["request_id"],r["execution"],"فعال" if r["origin"] else "حذف شد",
+                    "فعال" if r["target"] else "تخصیص نیافت") for r in race["requests"]]),
+            f"<p>تعداد اعضای مقصد بعد از آزمایش {race['occupancy']} نفر بود.</p>"]
+    if "replay_checks" in evidence:
+        labels = {
+            "baseline": "مسیر سالم",
+            "early-graduation": "فراغت هنگام اعتراض باز",
+            "no-clearance": "حذف شاهد تسویه",
+            "repeated-enrolment": "تخصیص تکراری با شناسهٔ تازه",
+            "capacity-one": "آستانهٔ ظرفیت یک نفر",
+            "duplicate-id": "شناسهٔ رویداد تکراری",
+            "clock-regression": "عقب‌گرد ساعت رویداد",
+        }
+        out += ["<h3>بازپخش و آزمون حساسیت ارزیاب</h3>",
+                table(["سناریو","نتیجه","شاهدها"],[
+                    (labels[case["scenario"]],
+                     "ورودی رد شد" if case["status"] == "invalid-input" else "تحلیل انجام شد",
+                     "، ".join(f"{item['rule']} · {item['event']}" for item in case["findings"]) or "—")
+                    for case in evidence["replay_checks"]]),
+                '<p>ورودی عمومی برای بازپخش در <a href="https://faran-mu.vercel.app/docs/semester-web.json">دفتر نیمسال</a> و اعداد این گزارش در <a href="https://faran-mu.vercel.app/docs/seminar-results.json">فایل شواهد محاسبات</a> منتشر شده‌اند.</p>']
+    return "".join(out)
+
+def references():
+    return "<h2>منابع علمی و فنی</h2><ol>" + "".join(
+        f'<li dir="ltr">{escape(title)} <a href="{escape(url)}">نسخهٔ منبع</a></li>' for title,url in REFERENCES
+    ) + "</ol>"
+
+def figures():
+    return '<h2>تصاویر محیط اجرا و معماری</h2>' + "".join(
+        f'<figure><img src="{escape((DOCS / path).as_uri())}" alt="{escape(caption)}">'
+        f'<figcaption>شکل {number}. {escape(caption)}</figcaption></figure>'
+        for number,(path,caption) in enumerate(IMAGE_NAMES,1)
+    )
+
+def appendix(roster):
+    description = (
+        "<section class='annex'><h2>پیوست الف ـ خلاصهٔ رسیدهای ثبت‌نام آزمایشی</h2>"
+        "<p>ستون گروه آموزشی از برنامهٔ نیمسال می‌آید. ستون درس و گروه Moodle شناسهٔ ذخیره‌شده در سامانه است. "
+        "نتیجهٔ هر ردیف به عضویت فعال همان پروندهٔ ساختگی در گروه مورد انتظار اشاره دارد.</p>"
+    )
+    rows = [(r["id"],r["major"],r["group"],r["instructor"],r["courseid"],r["groupid"],
+             "تأیید" if r["receipt_matches"] and r["membership_verified"] else "نیازمند بررسی") for r in roster]
+    return description + table(["پرونده","رشته","گروه آموزشی","مدرس","درس Moodle","گروه Moodle","نتیجه"],rows) + "</section>"
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--body-only", action="store_true", help="Render the main report without the raw receipt table")
+    args = parser.parse_args()
+    evidence = json.loads((DOCS / "seminar-results.json").read_text(encoding="utf8"))
+    body = manuscript() + result_tables(evidence) + figures() + references()
+    if not args.body_only:
+        body += appendix(evidence["roster"])
+    document = (f'<!doctype html><html lang="fa" dir="rtl"><meta charset="utf-8">'
+                f'<title>گزارش سمینار دانشگاه دیجیتال فاران</title><style>{STYLE}</style>'
+                f'<main>{body}</main></html>')
+    with TemporaryDirectory(prefix="faran-seminar-") as temporary:
+        folder = Path(temporary)
+        source = folder / "print.html"
+        source.write_text(document,encoding="utf8")
+        candidate = folder / "rendered.pdf"
+        subprocess.run([
+            os.environ.get("FARAN_RENDER_BROWSER",str(EDGE)), "--headless", "--disable-gpu",
+            "--allow-file-access-from-files", "--no-pdf-header-footer", f"--user-data-dir={folder / 'browser'}",
+            f"--print-to-pdf={candidate}", source.as_uri(),
+        ],timeout=120,check=True)
+        pdf = PdfReader(candidate)
+        assert len(pdf.pages) > 1
+        assert sum(len(page.images) for page in pdf.pages) >= 4, "Screenshot evidence missing"
+        if not args.body_only:
+            (DOCS / "faran-seminar.pdf").write_bytes(candidate.read_bytes())
+        print("Body pages" if args.body_only else "Total pages",len(pdf.pages))
+
+if __name__ == "__main__":
+    main()

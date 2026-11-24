@@ -1,0 +1,1279 @@
+{
+  "study_data": "synthetic-students",
+  "evidence_date": "2026-11-24",
+  "roster": [
+    {
+      "id": "student-001",
+      "major": "فناوری اطلاعات",
+      "group": 1,
+      "instructor": "role-0005",
+      "courseid": 4,
+      "groupid": 1,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-002",
+      "major": "مدیریت فناوری اطلاعات",
+      "group": 1,
+      "instructor": "role-0006",
+      "courseid": 5,
+      "groupid": 2,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-003",
+      "major": "مهندسی نرم‌افزار",
+      "group": 1,
+      "instructor": "role-0007",
+      "courseid": 6,
+      "groupid": 3,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-004",
+      "major": "علوم کامپیوتر",
+      "group": 1,
+      "instructor": "role-0008",
+      "courseid": 7,
+      "groupid": 4,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-005",
+      "major": "مهندسی کامپیوتر",
+      "group": 1,
+      "instructor": "role-0009",
+      "courseid": 8,
+      "groupid": 5,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-006",
+      "major": "فناوری اطلاعات",
+      "group": 1,
+      "instructor": "role-0005",
+      "courseid": 4,
+      "groupid": 1,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-007",
+      "major": "مدیریت فناوری اطلاعات",
+      "group": 1,
+      "instructor": "role-0006",
+      "courseid": 5,
+      "groupid": 2,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-008",
+      "major": "مهندسی نرم‌افزار",
+      "group": 1,
+      "instructor": "role-0007",
+      "courseid": 6,
+      "groupid": 3,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-009",
+      "major": "علوم کامپیوتر",
+      "group": 1,
+      "instructor": "role-0008",
+      "courseid": 7,
+      "groupid": 4,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-010",
+      "major": "مهندسی کامپیوتر",
+      "group": 1,
+      "instructor": "role-0009",
+      "courseid": 8,
+      "groupid": 5,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-011",
+      "major": "فناوری اطلاعات",
+      "group": 1,
+      "instructor": "role-0005",
+      "courseid": 4,
+      "groupid": 1,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-012",
+      "major": "مدیریت فناوری اطلاعات",
+      "group": 1,
+      "instructor": "role-0006",
+      "courseid": 5,
+      "groupid": 2,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-013",
+      "major": "مهندسی نرم‌افزار",
+      "group": 1,
+      "instructor": "role-0007",
+      "courseid": 6,
+      "groupid": 3,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-014",
+      "major": "علوم کامپیوتر",
+      "group": 1,
+      "instructor": "role-0008",
+      "courseid": 7,
+      "groupid": 4,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-015",
+      "major": "مهندسی کامپیوتر",
+      "group": 1,
+      "instructor": "role-0009",
+      "courseid": 8,
+      "groupid": 5,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-016",
+      "major": "فناوری اطلاعات",
+      "group": 1,
+      "instructor": "role-0005",
+      "courseid": 4,
+      "groupid": 1,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-017",
+      "major": "مدیریت فناوری اطلاعات",
+      "group": 1,
+      "instructor": "role-0006",
+      "courseid": 5,
+      "groupid": 2,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-018",
+      "major": "مهندسی نرم‌افزار",
+      "group": 1,
+      "instructor": "role-0007",
+      "courseid": 6,
+      "groupid": 3,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-019",
+      "major": "علوم کامپیوتر",
+      "group": 1,
+      "instructor": "role-0008",
+      "courseid": 7,
+      "groupid": 4,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-020",
+      "major": "مهندسی کامپیوتر",
+      "group": 1,
+      "instructor": "role-0009",
+      "courseid": 8,
+      "groupid": 5,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-021",
+      "major": "فناوری اطلاعات",
+      "group": 1,
+      "instructor": "role-0005",
+      "courseid": 4,
+      "groupid": 1,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-022",
+      "major": "مدیریت فناوری اطلاعات",
+      "group": 1,
+      "instructor": "role-0006",
+      "courseid": 5,
+      "groupid": 2,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-023",
+      "major": "مهندسی نرم‌افزار",
+      "group": 1,
+      "instructor": "role-0007",
+      "courseid": 6,
+      "groupid": 3,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-024",
+      "major": "علوم کامپیوتر",
+      "group": 1,
+      "instructor": "role-0008",
+      "courseid": 7,
+      "groupid": 4,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-025",
+      "major": "مهندسی کامپیوتر",
+      "group": 1,
+      "instructor": "role-0009",
+      "courseid": 8,
+      "groupid": 5,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-026",
+      "major": "فناوری اطلاعات",
+      "group": 1,
+      "instructor": "role-0005",
+      "courseid": 4,
+      "groupid": 1,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-027",
+      "major": "مدیریت فناوری اطلاعات",
+      "group": 1,
+      "instructor": "role-0006",
+      "courseid": 5,
+      "groupid": 2,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-028",
+      "major": "مهندسی نرم‌افزار",
+      "group": 1,
+      "instructor": "role-0007",
+      "courseid": 6,
+      "groupid": 3,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-029",
+      "major": "علوم کامپیوتر",
+      "group": 1,
+      "instructor": "role-0008",
+      "courseid": 7,
+      "groupid": 4,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-030",
+      "major": "مهندسی کامپیوتر",
+      "group": 1,
+      "instructor": "role-0009",
+      "courseid": 8,
+      "groupid": 5,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-031",
+      "major": "فناوری اطلاعات",
+      "group": 1,
+      "instructor": "role-0005",
+      "courseid": 4,
+      "groupid": 1,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-032",
+      "major": "مدیریت فناوری اطلاعات",
+      "group": 1,
+      "instructor": "role-0006",
+      "courseid": 5,
+      "groupid": 2,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-033",
+      "major": "مهندسی نرم‌افزار",
+      "group": 1,
+      "instructor": "role-0007",
+      "courseid": 6,
+      "groupid": 3,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-034",
+      "major": "علوم کامپیوتر",
+      "group": 1,
+      "instructor": "role-0008",
+      "courseid": 7,
+      "groupid": 4,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-035",
+      "major": "مهندسی کامپیوتر",
+      "group": 1,
+      "instructor": "role-0009",
+      "courseid": 8,
+      "groupid": 5,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-036",
+      "major": "فناوری اطلاعات",
+      "group": 1,
+      "instructor": "role-0005",
+      "courseid": 4,
+      "groupid": 1,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-037",
+      "major": "مدیریت فناوری اطلاعات",
+      "group": 1,
+      "instructor": "role-0006",
+      "courseid": 5,
+      "groupid": 2,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-038",
+      "major": "مهندسی نرم‌افزار",
+      "group": 1,
+      "instructor": "role-0007",
+      "courseid": 6,
+      "groupid": 3,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-039",
+      "major": "علوم کامپیوتر",
+      "group": 1,
+      "instructor": "role-0008",
+      "courseid": 7,
+      "groupid": 4,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-040",
+      "major": "مهندسی کامپیوتر",
+      "group": 1,
+      "instructor": "role-0009",
+      "courseid": 8,
+      "groupid": 5,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-041",
+      "major": "فناوری اطلاعات",
+      "group": 1,
+      "instructor": "role-0005",
+      "courseid": 4,
+      "groupid": 1,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-042",
+      "major": "مدیریت فناوری اطلاعات",
+      "group": 1,
+      "instructor": "role-0006",
+      "courseid": 5,
+      "groupid": 2,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-043",
+      "major": "مهندسی نرم‌افزار",
+      "group": 1,
+      "instructor": "role-0007",
+      "courseid": 6,
+      "groupid": 3,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-044",
+      "major": "علوم کامپیوتر",
+      "group": 1,
+      "instructor": "role-0008",
+      "courseid": 7,
+      "groupid": 4,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-045",
+      "major": "مهندسی کامپیوتر",
+      "group": 1,
+      "instructor": "role-0009",
+      "courseid": 8,
+      "groupid": 5,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-046",
+      "major": "فناوری اطلاعات",
+      "group": 1,
+      "instructor": "role-0005",
+      "courseid": 4,
+      "groupid": 1,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-047",
+      "major": "مدیریت فناوری اطلاعات",
+      "group": 1,
+      "instructor": "role-0006",
+      "courseid": 5,
+      "groupid": 2,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-048",
+      "major": "مهندسی نرم‌افزار",
+      "group": 1,
+      "instructor": "role-0007",
+      "courseid": 6,
+      "groupid": 3,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-049",
+      "major": "علوم کامپیوتر",
+      "group": 1,
+      "instructor": "role-0008",
+      "courseid": 7,
+      "groupid": 4,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-050",
+      "major": "مهندسی کامپیوتر",
+      "group": 1,
+      "instructor": "role-0009",
+      "courseid": 8,
+      "groupid": 5,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-051",
+      "major": "فناوری اطلاعات",
+      "group": 2,
+      "instructor": "role-0010",
+      "courseid": 4,
+      "groupid": 6,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-052",
+      "major": "مدیریت فناوری اطلاعات",
+      "group": 2,
+      "instructor": "role-0011",
+      "courseid": 5,
+      "groupid": 7,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-053",
+      "major": "مهندسی نرم‌افزار",
+      "group": 2,
+      "instructor": "role-0012",
+      "courseid": 6,
+      "groupid": 8,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-054",
+      "major": "علوم کامپیوتر",
+      "group": 2,
+      "instructor": "role-0013",
+      "courseid": 7,
+      "groupid": 9,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-055",
+      "major": "مهندسی کامپیوتر",
+      "group": 2,
+      "instructor": "role-0014",
+      "courseid": 8,
+      "groupid": 10,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-056",
+      "major": "فناوری اطلاعات",
+      "group": 2,
+      "instructor": "role-0010",
+      "courseid": 4,
+      "groupid": 6,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-057",
+      "major": "مدیریت فناوری اطلاعات",
+      "group": 2,
+      "instructor": "role-0011",
+      "courseid": 5,
+      "groupid": 7,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-058",
+      "major": "مهندسی نرم‌افزار",
+      "group": 2,
+      "instructor": "role-0012",
+      "courseid": 6,
+      "groupid": 8,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-059",
+      "major": "علوم کامپیوتر",
+      "group": 2,
+      "instructor": "role-0013",
+      "courseid": 7,
+      "groupid": 9,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-060",
+      "major": "مهندسی کامپیوتر",
+      "group": 2,
+      "instructor": "role-0014",
+      "courseid": 8,
+      "groupid": 10,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-061",
+      "major": "فناوری اطلاعات",
+      "group": 2,
+      "instructor": "role-0010",
+      "courseid": 4,
+      "groupid": 6,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-062",
+      "major": "مدیریت فناوری اطلاعات",
+      "group": 2,
+      "instructor": "role-0011",
+      "courseid": 5,
+      "groupid": 7,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-063",
+      "major": "مهندسی نرم‌افزار",
+      "group": 2,
+      "instructor": "role-0012",
+      "courseid": 6,
+      "groupid": 8,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-064",
+      "major": "علوم کامپیوتر",
+      "group": 2,
+      "instructor": "role-0013",
+      "courseid": 7,
+      "groupid": 9,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-065",
+      "major": "مهندسی کامپیوتر",
+      "group": 2,
+      "instructor": "role-0014",
+      "courseid": 8,
+      "groupid": 10,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-066",
+      "major": "فناوری اطلاعات",
+      "group": 2,
+      "instructor": "role-0010",
+      "courseid": 4,
+      "groupid": 6,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-067",
+      "major": "مدیریت فناوری اطلاعات",
+      "group": 2,
+      "instructor": "role-0011",
+      "courseid": 5,
+      "groupid": 7,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-068",
+      "major": "مهندسی نرم‌افزار",
+      "group": 2,
+      "instructor": "role-0012",
+      "courseid": 6,
+      "groupid": 8,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-069",
+      "major": "علوم کامپیوتر",
+      "group": 2,
+      "instructor": "role-0013",
+      "courseid": 7,
+      "groupid": 9,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-070",
+      "major": "مهندسی کامپیوتر",
+      "group": 2,
+      "instructor": "role-0014",
+      "courseid": 8,
+      "groupid": 10,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-071",
+      "major": "فناوری اطلاعات",
+      "group": 2,
+      "instructor": "role-0010",
+      "courseid": 4,
+      "groupid": 6,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-072",
+      "major": "مدیریت فناوری اطلاعات",
+      "group": 2,
+      "instructor": "role-0011",
+      "courseid": 5,
+      "groupid": 7,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-073",
+      "major": "مهندسی نرم‌افزار",
+      "group": 2,
+      "instructor": "role-0012",
+      "courseid": 6,
+      "groupid": 8,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-074",
+      "major": "علوم کامپیوتر",
+      "group": 2,
+      "instructor": "role-0013",
+      "courseid": 7,
+      "groupid": 9,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-075",
+      "major": "مهندسی کامپیوتر",
+      "group": 2,
+      "instructor": "role-0014",
+      "courseid": 8,
+      "groupid": 10,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-076",
+      "major": "فناوری اطلاعات",
+      "group": 2,
+      "instructor": "role-0010",
+      "courseid": 4,
+      "groupid": 6,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-077",
+      "major": "مدیریت فناوری اطلاعات",
+      "group": 2,
+      "instructor": "role-0011",
+      "courseid": 5,
+      "groupid": 7,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-078",
+      "major": "مهندسی نرم‌افزار",
+      "group": 2,
+      "instructor": "role-0012",
+      "courseid": 6,
+      "groupid": 8,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-079",
+      "major": "علوم کامپیوتر",
+      "group": 2,
+      "instructor": "role-0013",
+      "courseid": 7,
+      "groupid": 9,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-080",
+      "major": "مهندسی کامپیوتر",
+      "group": 2,
+      "instructor": "role-0014",
+      "courseid": 8,
+      "groupid": 10,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-081",
+      "major": "فناوری اطلاعات",
+      "group": 2,
+      "instructor": "role-0010",
+      "courseid": 4,
+      "groupid": 6,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-082",
+      "major": "مدیریت فناوری اطلاعات",
+      "group": 2,
+      "instructor": "role-0011",
+      "courseid": 5,
+      "groupid": 7,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-083",
+      "major": "مهندسی نرم‌افزار",
+      "group": 2,
+      "instructor": "role-0012",
+      "courseid": 6,
+      "groupid": 8,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-084",
+      "major": "علوم کامپیوتر",
+      "group": 2,
+      "instructor": "role-0013",
+      "courseid": 7,
+      "groupid": 9,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-085",
+      "major": "مهندسی کامپیوتر",
+      "group": 2,
+      "instructor": "role-0014",
+      "courseid": 8,
+      "groupid": 10,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-086",
+      "major": "فناوری اطلاعات",
+      "group": 2,
+      "instructor": "role-0010",
+      "courseid": 4,
+      "groupid": 6,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-087",
+      "major": "مدیریت فناوری اطلاعات",
+      "group": 2,
+      "instructor": "role-0011",
+      "courseid": 5,
+      "groupid": 7,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-088",
+      "major": "مهندسی نرم‌افزار",
+      "group": 2,
+      "instructor": "role-0012",
+      "courseid": 6,
+      "groupid": 8,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-089",
+      "major": "علوم کامپیوتر",
+      "group": 2,
+      "instructor": "role-0013",
+      "courseid": 7,
+      "groupid": 9,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-090",
+      "major": "مهندسی کامپیوتر",
+      "group": 2,
+      "instructor": "role-0014",
+      "courseid": 8,
+      "groupid": 10,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-091",
+      "major": "فناوری اطلاعات",
+      "group": 2,
+      "instructor": "role-0010",
+      "courseid": 4,
+      "groupid": 6,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-092",
+      "major": "مدیریت فناوری اطلاعات",
+      "group": 2,
+      "instructor": "role-0011",
+      "courseid": 5,
+      "groupid": 7,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-093",
+      "major": "مهندسی نرم‌افزار",
+      "group": 2,
+      "instructor": "role-0012",
+      "courseid": 6,
+      "groupid": 8,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-094",
+      "major": "علوم کامپیوتر",
+      "group": 2,
+      "instructor": "role-0013",
+      "courseid": 7,
+      "groupid": 9,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-095",
+      "major": "مهندسی کامپیوتر",
+      "group": 2,
+      "instructor": "role-0014",
+      "courseid": 8,
+      "groupid": 10,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-096",
+      "major": "فناوری اطلاعات",
+      "group": 2,
+      "instructor": "role-0010",
+      "courseid": 4,
+      "groupid": 6,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-097",
+      "major": "مدیریت فناوری اطلاعات",
+      "group": 2,
+      "instructor": "role-0011",
+      "courseid": 5,
+      "groupid": 7,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-098",
+      "major": "مهندسی نرم‌افزار",
+      "group": 2,
+      "instructor": "role-0012",
+      "courseid": 6,
+      "groupid": 8,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-099",
+      "major": "علوم کامپیوتر",
+      "group": 2,
+      "instructor": "role-0013",
+      "courseid": 7,
+      "groupid": 9,
+      "receipt_matches": true,
+      "membership_verified": true
+    },
+    {
+      "id": "student-100",
+      "major": "مهندسی کامپیوتر",
+      "group": 2,
+      "instructor": "role-0014",
+      "courseid": 8,
+      "groupid": 10,
+      "receipt_matches": true,
+      "membership_verified": true
+    }
+  ],
+  "worker_audit": {
+    "workflow": "FaranTraceHot01",
+    "first_execution": 12,
+    "last_execution": 2011,
+    "successful_db_rows": 2000,
+    "matched_ledger_rows": 2000,
+    "unique_roles": 2000,
+    "managers": {
+      "ceo": 1,
+      "cto": 700,
+      "engineer": 799,
+      "pm": 500
+    }
+  },
+  "queue": {
+    "unit": "ms",
+    "original_cli": {
+      "execution": 20,
+      "created_ms": 1795462351380,
+      "started_ms": 1795462351435,
+      "dispatch_to_created": 12788,
+      "created_to_started": 55,
+      "started_to_node": 1693
+    },
+    "registrations": [
+      {
+        "mode": "cli",
+        "trace": "f4285b19-d0cd-4269-ac29-9049359d2707",
+        "execution": "21",
+        "course": 4,
+        "dispatch_ms": 58920,
+        "redis_queue_ms": null,
+        "moodle_ms": 66859
+      },
+      {
+        "mode": "worker",
+        "trace": "3340026a-db00-4ef6-8832-dfa8dc5dac4b",
+        "execution": "1",
+        "course": 4,
+        "dispatch_ms": 11490,
+        "redis_queue_ms": 6.755,
+        "moodle_ms": 19524
+      },
+      {
+        "mode": "cli",
+        "trace": "0717abd8-f7ea-4a9b-bd17-afd593a8fc13",
+        "execution": "22",
+        "course": 4,
+        "dispatch_ms": 46937,
+        "redis_queue_ms": null,
+        "moodle_ms": 132439
+      },
+      {
+        "mode": "worker",
+        "trace": "cc9c3880-f103-484d-bffd-e12a362a4a7d",
+        "execution": "2",
+        "course": 4,
+        "dispatch_ms": 4811,
+        "redis_queue_ms": 1.845,
+        "moodle_ms": 112513
+      },
+      {
+        "mode": "worker",
+        "trace": "5e10eb49-1cec-4edd-b6cc-077664d5ed1e",
+        "execution": "3",
+        "course": 4,
+        "dispatch_ms": 2374,
+        "redis_queue_ms": 17.666,
+        "moodle_ms": 133407
+      },
+      {
+        "mode": "cli",
+        "trace": "abc22aa4-7449-4ed1-96b6-5ade480e816c",
+        "execution": "23",
+        "course": 4,
+        "dispatch_ms": 44597,
+        "redis_queue_ms": null,
+        "moodle_ms": 24237
+      },
+      {
+        "mode": "cli",
+        "trace": "a61e020d-af8e-4fbf-ac5a-848bc32573f4",
+        "execution": "24",
+        "course": 4,
+        "dispatch_ms": 58967,
+        "redis_queue_ms": null,
+        "moodle_ms": 78212
+      }
+    ],
+    "excluded_warmup": "f4285b19-d0cd-4269-ac29-9049359d2707",
+    "median_cli": 46937,
+    "median_worker": 4811,
+    "median_redis_wait": 6.755
+  },
+  "race": {
+    "occupancy": 1,
+    "verified": true,
+    "requests": [
+      {
+        "request_id": "bda74bcc3c894d7dbb506d92a3c1bcf4-0",
+        "execution": "5",
+        "origin": false,
+        "target": true,
+        "moved": true
+      },
+      {
+        "request_id": "bda74bcc3c894d7dbb506d92a3c1bcf4-1",
+        "execution": "6",
+        "origin": true,
+        "target": false,
+        "moved": false
+      }
+    ]
+  },
+  "trace": {
+    "task_id": "b2141833-686e-4d3d-a2b6-f080c720fa30",
+    "n8n_execution": "20",
+    "moodle_course": 4,
+    "verified": true,
+    "stages": [
+      {
+        "name": "Paperclip",
+        "submitted": 1795462333702,
+        "started": 1795462333790,
+        "ended": 1795462336236,
+        "wait_ms": 88,
+        "service_ms": 2446
+      },
+      {
+        "name": "n8n",
+        "submitted": 1795462338592,
+        "started": 1795462353128,
+        "ended": 1795462355745,
+        "wait_ms": 14536,
+        "service_ms": 2617
+      },
+      {
+        "name": "Moodle",
+        "submitted": 1795462355939,
+        "started": 1795462356112,
+        "ended": 1795462362335,
+        "wait_ms": 173,
+        "service_ms": 6223
+      }
+    ],
+    "analysis": {
+      "task_id": "b2141833-686e-4d3d-a2b6-f080c720fa30",
+      "elapsed_ms": 28633,
+      "parts": [
+        {
+          "stage": "Paperclip",
+          "kind": "dispatch-to-start",
+          "ms": 88
+        },
+        {
+          "stage": "Paperclip",
+          "kind": "service",
+          "ms": 2446
+        },
+        {
+          "from": "Paperclip",
+          "to": "n8n",
+          "kind": "handoff",
+          "ms": 2356
+        },
+        {
+          "stage": "n8n",
+          "kind": "dispatch-to-start",
+          "ms": 14536
+        },
+        {
+          "stage": "n8n",
+          "kind": "service",
+          "ms": 2617
+        },
+        {
+          "from": "n8n",
+          "to": "Moodle",
+          "kind": "handoff",
+          "ms": 194
+        },
+        {
+          "stage": "Moodle",
+          "kind": "dispatch-to-start",
+          "ms": 173
+        },
+        {
+          "stage": "Moodle",
+          "kind": "service",
+          "ms": 6223
+        }
+      ],
+      "largest": {
+        "stage": "n8n",
+        "kind": "dispatch-to-start",
+        "ms": 14536
+      },
+      "share": 0.5076659798135019
+    }
+  },
+  "replay_checks": [
+    {
+      "scenario": "baseline",
+      "status": "audit-complete",
+      "findings": []
+    },
+    {
+      "scenario": "early-graduation",
+      "status": "audit-complete",
+      "findings": [
+        {
+          "rule": "DEGREE_EVIDENCE",
+          "event": "demo-17"
+        },
+        {
+          "rule": "DEGREE_EVIDENCE",
+          "event": "demo-17"
+        },
+        {
+          "rule": "OPEN_APPEAL",
+          "event": "demo-17"
+        }
+      ]
+    },
+    {
+      "scenario": "no-clearance",
+      "status": "audit-complete",
+      "findings": [
+        {
+          "rule": "DEGREE_EVIDENCE",
+          "event": "demo-17"
+        }
+      ]
+    },
+    {
+      "scenario": "repeated-enrolment",
+      "status": "audit-complete",
+      "findings": [
+        {
+          "rule": "DUPLICATE_SEAT",
+          "event": "duplicate-seat-test"
+        }
+      ]
+    },
+    {
+      "scenario": "capacity-one",
+      "status": "audit-complete",
+      "findings": [
+        {
+          "rule": "CAPACITY",
+          "event": "demo-04"
+        },
+        {
+          "rule": "CAPACITY",
+          "event": "demo-09"
+        }
+      ]
+    },
+    {
+      "scenario": "duplicate-id",
+      "status": "invalid-input",
+      "findings": []
+    },
+    {
+      "scenario": "clock-regression",
+      "status": "invalid-input",
+      "findings": []
+    }
+  ],
+  "replay_input_sha256": {
+    "semester_input": "7d071ad0873763b7196f8ff32cb10319e994485221d0b8aa553b7460dafd4cda",
+    "local_journey_evaluator": "1ec81dd3f764b0f5656cc190d1f9f1ddd7f4cbc384e67039aab9f8293eaaae9b"
+  }
+}
