@@ -62,6 +62,7 @@ services:
       PAPERCLIP_DEPLOYMENT_MODE: authenticated
       PAPERCLIP_DEPLOYMENT_EXPOSURE: private
       PAPERCLIP_PUBLIC_URL: http://localhost:${FARAN_PAPERCLIP_PORT:-13100}
+      PAPERCLIP_ALLOWED_HOSTNAMES: localhost,127.0.0.1,paperclip
       BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:?Run python scripts/start.py}
       PAPERCLIP_TOOL_ACTION_SIGNING_SECRET: ${PAPERCLIP_TOOL_ACTION_SIGNING_SECRET:?Run python scripts/start.py}
     ports: ["127.0.0.1:${FARAN_PAPERCLIP_PORT:-13100}:3100"]
