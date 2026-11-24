@@ -58,3 +58,10 @@ footer{border-top:1px solid var(--studio-line);padding-block:20px}
 .public-login input{display:block;width:100%;margin:.35rem 0 1rem;padding:.5rem}
 
 .review-note{margin-block:1rem;padding:1rem 1.25rem;background:#f0f5f3;color:#183630;border-inline-start:4px solid var(--site-accent);border-radius:10px}.review-note h2{margin:0;font-size:1.05rem}.review-note p{margin:.4rem 0}.review-note code{background:white;padding:.1rem .35rem;border-radius:4px}
+
+.public-release{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-block:1rem;background:white;border:1px solid #d3dfdc;border-radius:14px;padding:clamp(1rem,3vw,1.6rem)}
+.public-release h2{margin:0;color:#18352f}.public-release p{margin:.25rem 0 0;color:#455c55}
+.release-links{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.release-links a{padding:.55rem .8rem;border:1px solid #cbd9d5;border-radius:8px;text-decoration:none;font-weight:bold}
+.release-links .release-pdf{background:#193d35;color:white;border-color:#193d35}.release-pdf small{margin-inline-start:.5rem}
+.release-links a:hover,.release-links a:focus-visible{text-decoration:underline}

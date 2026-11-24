@@ -1,0 +1,179 @@
+name: faran-demo
+
+x-n8n: &n8n
+  image: docker.n8n.io/n8nio/n8n@sha256:4384b9ff20a78bc1708c35ce7864f84f724611de7801fb36d715998db7c000f1
+  restart: unless-stopped
+  environment:
+    DB_TYPE: postgresdb
+    DB_POSTGRESDB_HOST: n8n-db
+    DB_POSTGRESDB_DATABASE: n8n
+    DB_POSTGRESDB_USER: n8n
+    DB_POSTGRESDB_PASSWORD: ${N8N_DB_PASSWORD:?Run python scripts/start.py}
+    N8N_ENCRYPTION_KEY: ${N8N_ENCRYPTION_KEY:?Run python scripts/start.py}
+    EXECUTIONS_MODE: queue
+    QUEUE_BULL_REDIS_HOST: redis
+    N8N_EDITOR_BASE_URL: http://localhost:${FARAN_N8N_PORT:-15678}/
+    WEBHOOK_URL: http://localhost:${FARAN_N8N_PORT:-15678}/
+    N8N_SECURE_COOKIE: "false"
+    N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: "true"
+    N8N_DIAGNOSTICS_ENABLED: "false"
+    N8N_PERSONALIZATION_ENABLED: "false"
+    N8N_VERSION_NOTIFICATIONS_ENABLED: "false"
+    N8N_TEMPLATES_ENABLED: "false"
+    N8N_DISABLED_MODULES: mcp
+    N8N_UNVERIFIED_PACKAGES_ENABLED: "false"
+    QUEUE_HEALTH_CHECK_ACTIVE: "true"
+    GENERIC_TIMEZONE: Asia/Tehran
+  depends_on:
+    n8n-db: { condition: service_healthy }
+    redis: { condition: service_healthy }
+  networks: [workflow, n8n-data]
+
+x-static-health: &static-health
+  test: [CMD, wget, -q, -O, /dev/null, "http://127.0.0.1/"]
+  interval: 5s
+  timeout: 3s
+  retries: 12
+
+services:
+  faran:
+    build:
+      context: .
+      dockerfile: infra/workflow/web/faran.Dockerfile
+    restart: unless-stopped
+    ports: ["127.0.0.1:${FARAN_WEB_PORT:-18000}:80"]
+    healthcheck: *static-health
+
+  evaluator:
+    build:
+      context: https://github.com/maddixmhn/dr-soleimani-evaluator.git#5a8bd99fa1684e70476845e12d1295b93bf0e9a2
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports: ["127.0.0.1:${FARAN_EVAL_PORT:-18001}:80"]
+    healthcheck: *static-health
+
+  paperclip:
+    image: ghcr.io/paperclipai/paperclip:2026.1117.0
+    restart: unless-stopped
+    environment:
+      HOST: 0.0.0.0
+      PORT: "3100"
+      PAPERCLIP_HOME: /paperclip
+      PAPERCLIP_DEPLOYMENT_MODE: authenticated
+      PAPERCLIP_DEPLOYMENT_EXPOSURE: private
+      PAPERCLIP_PUBLIC_URL: http://localhost:${FARAN_PAPERCLIP_PORT:-13100}
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:?Run python scripts/start.py}
+      PAPERCLIP_TOOL_ACTION_SIGNING_SECRET: ${PAPERCLIP_TOOL_ACTION_SIGNING_SECRET:?Run python scripts/start.py}
+    ports: ["127.0.0.1:${FARAN_PAPERCLIP_PORT:-13100}:3100"]
+    volumes: [paperclip:/paperclip]
+    networks: [workflow]
+    healthcheck:
+      test: [CMD, node, -e, "fetch('http://127.0.0.1:3100/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+      start_period: 60s
+
+  n8n:
+    <<: *n8n
+    ports: ["127.0.0.1:${FARAN_N8N_PORT:-15678}:5678"]
+    volumes:
+      - n8n_settings:/home/node/.n8n
+      - ./infra/workflow/workflows/faran-paperclip-health.json:/workflows/paperclip-health.json:ro
+    healthcheck:
+      test: [CMD, node, -e, "fetch('http://127.0.0.1:5678/healthz/readiness').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+
+  worker:
+    <<: *n8n
+    command: ["worker", "--concurrency=4"]
+    healthcheck:
+      test: [CMD, node, -e, "fetch('http://127.0.0.1:5678/healthz/readiness').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+
+  n8n-db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: n8n
+      POSTGRES_USER: n8n
+      POSTGRES_PASSWORD: ${N8N_DB_PASSWORD:?Run python scripts/start.py}
+    volumes: [n8n_db:/var/lib/postgresql/data]
+    networks: [n8n-data]
+    healthcheck:
+      test: [CMD, pg_isready, -U, n8n, -d, n8n]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes: [redis:/data]
+    networks: [n8n-data]
+    healthcheck:
+      test: [CMD, redis-cli, ping]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+
+  moodle:
+    build:
+      context: infra/portable
+      dockerfile: moodle.Dockerfile
+      args:
+        MOODLE_PHP_IMAGE: ${FARAN_MOODLE_PHP_IMAGE:-moodlehq/moodle-php-apache:8.3}
+    restart: unless-stopped
+    environment:
+      FARAN_LMS_DB_PASSWORD: ${FARAN_LMS_DB_PASSWORD:?Run python scripts/start.py}
+      MOODLE_ADMIN_PASSWORD: ${MOODLE_ADMIN_PASSWORD:?Run python scripts/start.py}
+      MOODLE_URL: http://localhost:${FARAN_MOODLE_PORT:-18700}
+    ports: ["127.0.0.1:${FARAN_MOODLE_PORT:-18700}:80"]
+    volumes:
+      - moodle_data:/var/www/moodledata
+      - moodle_config:/var/www/faran-config
+    depends_on:
+      moodle-db: { condition: service_healthy }
+    networks: [moodle-data, workflow]
+    healthcheck:
+      test: [CMD, curl, --fail, --silent, --output, /dev/null, "http://127.0.0.1/login/index.php"]
+      interval: 10s
+      timeout: 5s
+      retries: 24
+      start_period: 90s
+
+  moodle-db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: moodle
+      POSTGRES_USER: moodle
+      POSTGRES_PASSWORD: ${FARAN_LMS_DB_PASSWORD:?Run python scripts/start.py}
+    volumes: [moodle_db:/var/lib/postgresql/data]
+    networks: [moodle-data]
+    healthcheck:
+      test: [CMD, pg_isready, -U, moodle, -d, moodle]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+
+volumes:
+  paperclip:
+  n8n_settings:
+  n8n_db:
+  redis:
+  moodle_data:
+  moodle_config:
+  moodle_db:
+
+networks:
+  workflow:
+  n8n-data: { internal: true }
+  moodle-data: { internal: true }

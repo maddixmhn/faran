@@ -1,0 +1,16 @@
+**
+!index.html
+!dashboard.html
+!login.html
+!app.js
+!site.css
+!sw.js
+!manifest.webmanifest
+!icon.svg
+!docs/
+!docs/**
+docs/SEMINAR-PRINT.html
+!infra/
+!infra/workflow/
+!infra/workflow/web/
+!infra/workflow/web/faran.Dockerfile
