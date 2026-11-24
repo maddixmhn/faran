@@ -1,0 +1,146 @@
+{
+  "schema": "faran-journey/1",
+  "synthetic": true,
+  "clock": "simulated-minutes",
+  "capacity": {
+    "seminar-demo": 2
+  },
+  "events": [
+    {
+      "event_id": "demo-01",
+      "minute": 0,
+      "student": "new-01",
+      "course": "seminar-demo",
+      "activity": "requested",
+      "actor": "student"
+    },
+    {
+      "event_id": "demo-02",
+      "minute": 0,
+      "student": "new-01",
+      "course": "seminar-demo",
+      "activity": "enrolled",
+      "actor": "registrar"
+    },
+    {
+      "event_id": "demo-03",
+      "minute": 1,
+      "student": "returning-02",
+      "course": "seminar-demo",
+      "activity": "requested",
+      "actor": "student"
+    },
+    {
+      "event_id": "demo-04",
+      "minute": 1,
+      "student": "returning-02",
+      "course": "seminar-demo",
+      "activity": "enrolled",
+      "actor": "registrar"
+    },
+    {
+      "event_id": "demo-05",
+      "minute": 2,
+      "student": "senior-03",
+      "course": "seminar-demo",
+      "activity": "requested",
+      "actor": "student"
+    },
+    {
+      "event_id": "demo-06",
+      "minute": 2,
+      "student": "senior-03",
+      "course": "seminar-demo",
+      "activity": "waitlisted",
+      "actor": "registrar"
+    },
+    {
+      "event_id": "demo-07",
+      "minute": 10,
+      "student": "new-01",
+      "course": "seminar-demo",
+      "activity": "exam_submitted",
+      "actor": "student"
+    },
+    {
+      "event_id": "demo-08",
+      "minute": 11,
+      "student": "returning-02",
+      "course": "seminar-demo",
+      "activity": "withdrawn",
+      "actor": "student"
+    },
+    {
+      "event_id": "demo-09",
+      "minute": 11,
+      "student": "senior-03",
+      "course": "seminar-demo",
+      "activity": "enrolled",
+      "actor": "registrar"
+    },
+    {
+      "event_id": "demo-10",
+      "minute": 13,
+      "student": "new-01",
+      "course": "seminar-demo",
+      "activity": "grade_posted",
+      "actor": "instructor"
+    },
+    {
+      "event_id": "demo-11",
+      "minute": 21,
+      "student": "senior-03",
+      "course": "seminar-demo",
+      "activity": "exam_submitted",
+      "actor": "student"
+    },
+    {
+      "event_id": "demo-12",
+      "minute": 24,
+      "student": "senior-03",
+      "course": "seminar-demo",
+      "activity": "grade_posted",
+      "actor": "instructor"
+    },
+    {
+      "event_id": "demo-13",
+      "minute": 24,
+      "student": "senior-03",
+      "course": "seminar-demo",
+      "activity": "appeal_opened",
+      "actor": "student"
+    },
+    {
+      "event_id": "demo-14",
+      "minute": 28,
+      "student": "senior-03",
+      "course": "seminar-demo",
+      "activity": "appeal_closed",
+      "actor": "exam_board"
+    },
+    {
+      "event_id": "demo-15",
+      "minute": 28,
+      "student": "senior-03",
+      "course": "seminar-demo",
+      "activity": "credits_verified",
+      "actor": "registrar"
+    },
+    {
+      "event_id": "demo-16",
+      "minute": 28,
+      "student": "senior-03",
+      "course": "seminar-demo",
+      "activity": "clearance_verified",
+      "actor": "student_services"
+    },
+    {
+      "event_id": "demo-17",
+      "minute": 28,
+      "student": "senior-03",
+      "course": "seminar-demo",
+      "activity": "graduated",
+      "actor": "registrar"
+    }
+  ]
+}

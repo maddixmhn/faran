@@ -15,3 +15,6 @@ docs/*
 !docs/article.html
 
 !docs/registration-trace.json
+
+!docs/semester-web.html
+!docs/semester-web.json
