@@ -1,0 +1,12 @@
+<!doctype html><html lang="fa" dir="rtl"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ورود مدیر | دانشگاه دیجیتال فاران</title><link rel="stylesheet" href="/site.css"><body class="public-site" style="--site-accent:#429770"><nav><a href="/">دانشگاه دیجیتال فاران</a><a href="/login.html">ورود به داشبورد ↗</a></nav><main><section class="public-login"><h1>ورود به داشبورد</h1><p>نسخهٔ نمایشی با داده‌های آزمایشی</p><form id="login"><label>نام کاربری<input name="username" required autocomplete="username" dir="ltr"></label><label>رمز عبور<input name="password" required type="password" autocomplete="current-password" dir="ltr"></label><button class="public-cta">ورود</button><p id="feedback" role="alert"></p></form></section><script>
+    document.getElementById('login').addEventListener('submit',event=>{
+      event.preventDefault();
+      const data=new FormData(event.currentTarget);
+      if(data.get('username')!=='admin'||data.get('password')!=='admin'){
+        document.getElementById('feedback').textContent='نام کاربری یا رمز عبور درست نیست.';
+        return;
+      }
+      sessionStorage.setItem('demo-admin','yes');
+      location.replace('/dashboard.html'+location.hash);
+    });
+    </script></main><footer><a href="https://dr-soleimani-evaluator.vercel.app">پروژهٔ همراه ↗</a> · <a href="https://github.com/maddixmhn/faran">گیت‌هاب پروژه ↗</a></footer></body></html>

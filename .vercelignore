@@ -18,3 +18,6 @@ docs/*
 
 !docs/semester-web.html
 !docs/semester-web.json
+
+!dashboard.html
+!login.html
