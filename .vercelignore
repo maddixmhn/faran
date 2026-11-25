@@ -13,6 +13,9 @@ docs/*
 !docs/seminar.html
 !docs/code-graph.json
 !docs/article.html
+!docs/presentation.html
+!docs/presentation.css
+!docs/seminar-presentation.pdf
 
 !docs/registration-trace.json
 

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="ارائهٔ درس سمینار، پژوهش و پیاده‌سازی دانشگاه دیجیتال فاران">
+  <title>ارائهٔ درس سمینار | دانشگاه دیجیتال فاران</title>
+  <link rel="stylesheet" href="/docs/presentation.css">
+</head>
+<body class="seminar">
+<header><div class="wrap"><strong>دانشگاه دیجیتال فاران</strong><nav class="links" aria-label="پیوندهای پروژه"><a href="/">صفحهٔ اصلی</a><a href="/university/project.html">پروژهٔ سمینار</a><a href="https://dr-soleimani-evaluator.vercel.app/docs/presentation.html">ارائهٔ درس ارزیابی</a></nav></div></header>
+<main class="wrap">
+  <div class="hero">
+    <p class="meta">درس سمینار · استاد دکتر سعید شکراللهی · دانشجو محمد مهرانی</p>
+    <h1>دانشگاه دیجیتال فاران</h1>
+    <p>این پروژه نشان می‌دهد چگونه می‌توان ساختار یک مؤسسهٔ آموزش مجازی را به سامانه‌ای تبدیل کرد که هر درخواست آموزشی در آن قابل پیگیری و نتیجهٔ آن با شاهد مستقل قابل بررسی باشد. نمونهٔ دفاع از ثبت‌نام و رقابت برای آخرین صندلی شروع می‌شود.</p>
+    <div class="links"><a class="primary print-hidden" href="/docs/seminar-presentation.pdf" download>دانلود جزوهٔ ارائه (PDF)</a><a class="secondary" href="/docs/faran-seminar.pdf">گزارش کامل سمینار (PDF)</a><a href="/docs/article.html">مقالهٔ وب</a><a href="https://github.com/maddixmhn/faran">گیت‌هاب</a></div>
+  </div>
+  <nav class="links toc" aria-label="فهرست ارائه"><a href="#portfolio">اجزای پروژه</a><a href="#math">فرمول‌ها و قواعد</a><a href="#implementation">کد و بازتولید</a><a href="#results">نتایج و شواهد</a><a href="#defense">ترتیب دفاع</a><a href="#sources">منابع</a></nav>
+  <section id="portfolio" class="block">
+    <h2>اجزای پروژه و مسیر نمایش</h2>
+    <div class="stack">
+      <article class="card"><h3>درگاه و چارت سازمانی</h3><p>ساختار آموزش، امور دانشجویی، مالی، پژوهش و فناوری از منابع عمومی مؤسسه بازخوانی شد. درگاه به خدمات و رشته‌های شش دانشکده می‌رسد. چارت شامل ۳۰ گره و ۲۹ رابطهٔ سازمانی است.</p><div class="links"><a href="/university/faculties.html">دانشکده‌ها</a><a href="/topology/index.html?design=faran-official-structure">چارت تعاملی</a><a href="/topology/campus-sources.html">راهنمای منابع مؤسسه</a></div></article>
+      <article class="card"><h3>گردش‌کار و ردیابی</h3><p>Paperclip واگذاری را ثبت می‌کند، n8n اجرای وظیفه را پیگیری می‌کند و Moodle عضویت را ثبت و بازخوانی می‌کند. مشاهدهٔ کنسول و نتیجهٔ عضویت دو شاهد متفاوت‌اند.</p><div class="links"><a href="/topology/index.html?design=faran-infrastructure">نقشهٔ زیرساخت</a><a href="/dashboard.html">داشبورد آزمایشی</a><a href="/docs/registration-trace.json">رد ثبت‌نام JSON</a></div></article>
+      <article class="card"><h3>چرخهٔ نیمسال و قواعد آموزشی</h3><p>در تمرین بازپخش، رویدادهای ثبت‌نام، ظرفیت، اعتراض و فراغت از تحصیل با قواعد قابل تکرار بررسی شدند. ابزار حذف نیمسال زمان، درخواست کتبی و شاهد تصمیم شورا را برای پروندهٔ نمونه کنترل می‌کند.</p><div class="links"><a href="/docs/semester-web.html">میزکار نیمسال</a><a href="/topology/term-review.html">بررسی حذف نیمسال</a><a href="/docs/semester-web.json">رویدادهای نمونه</a></div></article>
+      <article class="card"><h3>وب، PWA و Android</h3><p>رابط فارسی روی وب عرضه شده است. بستهٔ Capacitor صفحه‌ها و مستندات را همراه دارد. گردش‌کار Paperclip، n8n و Moodle در محیط جداگانه اجرا می‌شود.</p><div class="links"><a href="/manifest.webmanifest">manifest وب</a><a href="https://github.com/maddixmhn/faran/releases/download/android-v1.2.0/faran-1.2.0.apk">دانلود APK ۱٫۲٫۰</a><a href="/docs/QUICKSTART-FA.md">راهنمای فارسی</a></div></article>
+    </div>
+  </section>
+  <section id="math" class="block">
+    <h2>فرمول‌ها و قواعد پذیرش</h2>
+    <h3>تأخیر سرتاسری و سهم هر مرحله</h3>
+    <div class="formula" dir="ltr">Wᵢ = startᵢ − submitᵢ
+Sᵢ = endᵢ − startᵢ
+Hᵢ = submitᵢ₊₁ − endᵢ
+T = Σᵢ(Wᵢ + Sᵢ) + Σᵢ Hᵢ
+share(x) = x / T</div>
+    <p>در این فرمول <bdi>Wᵢ</bdi> فاصلهٔ تحویل تا شروع است. اگر مرحله با CLI راه بیفتد، این بازه آماده‌سازی فرایند را هم در بر می‌گیرد. در اجرای ۲۰، <bdi>14,536 / 28,633 ≈ 50.8%</bdi> سهم همین فاصله برای n8n بود.</p>
+    <h3>صحت عضویت و رقابت هم‌زمان</h3>
+    <div class="formula" dir="ltr">matchᵢ = receipt_matchesᵢ ∧ membership_verifiedᵢ
+verification rate = Σᵢ 1[matchᵢ] / N
+Σᵢ 1[movedᵢ] = 1  |  target occupancy = 1
+¬movedᵢ ⇒ origin membershipᵢ ∧ ¬target membershipᵢ</div>
+    <p>شاهد عضویت برای هر پرونده از بازخوانی Moodle می‌آید. در رقابت آخرین صندلی، فقط دیدن یک موفقیت کافی نیست. باید حفظ گروه قبلی برای درخواست دوم و ظرفیت نهایی مقصد هم بررسی شود.</p>
+    <h3>مقایسهٔ اجراها</h3>
+    <div class="formula" dir="ltr">Δmedian = median(T_CLI) − median(T_worker)
+        = 46,937 − 4,811 = 42,126 ms</div>
+    <p>هر میانه از سه مشاهده محاسبه شد. اختلاف توصیفی این نمونه‌هاست. زمان Moodle و سایر اجزای مسیر می‌توانند تغییر کنند. اندازهٔ مستقل صف Redis جداگانه ثبت شد.</p>
+  </section>
+  <section id="implementation" class="block">
+    <h2>پیاده‌سازی و بازتولید</h2>
+    <table><thead><tr><th scope="col">زبان یا ابزار</th><th scope="col">کاربرد</th><th scope="col">فایل یا نقطهٔ ورود</th></tr></thead><tbody>
+      <tr><th scope="row">Python</th><td>ساخت صفحه‌های مؤسسه و ثبت رد اجرای ثبت‌نام؛ عملیات و شواهد با شناسهٔ مشترک به هم متصل‌اند.</td><td><a href="https://github.com/maddixmhn/faran/blob/master/scripts/build-university.py">ساخت درگاه</a> · <a href="https://github.com/maddixmhn/faran/blob/master/infra/workflow/scripts/trace-registration.py">ثبت رد اجرا</a></td></tr>
+      <tr><th scope="row">PHP و Moodle</th><td>انجام اقدام آموزشی در نمونهٔ محلی و بازخوانی نتیجه.</td><td><a href="https://github.com/maddixmhn/faran/blob/master/infra/workflow/scripts/trace-enrol.php">اسکریپت ثبت‌نام</a></td></tr>
+      <tr><th scope="row">JSON، YAML و Docker Compose</th><td>تعریف گردش‌کار، سرویس‌ها، پایگاه داده و صف. فعال‌سازی محیط طبق راهنمای محلی انجام می‌شود.</td><td><a href="https://github.com/maddixmhn/faran/tree/master/infra/workflow/workflows">تعریف گردش‌کارها</a> · <a href="https://github.com/maddixmhn/faran/blob/master/infra/workflow/compose.local.yaml">Compose محلی</a></td></tr>
+      <tr><th scope="row">HTML، CSS، JavaScript و TypeScript</th><td>رابط راست‌چین، موتور قواعد حذف نیمسال و ساخت مدل گراف در Homelable.</td><td><a href="https://github.com/maddixmhn/faran/blob/master/integrations/homelable/term-review.mjs">قواعد حذف نیمسال</a> · <a href="https://github.com/maddixmhn/faran/blob/master/integrations/homelable/institution-designs.ts">مدل چارت</a></td></tr>
+      <tr><th scope="row">Java، Gradle و Capacitor</th><td>بستهٔ وب آفلاین و اتصال انتخاب‌گر ذخیره و چاپ اندروید.</td><td><a href="https://github.com/maddixmhn/faran/tree/master/android">کد و تنظیمات اندروید</a></td></tr>
+    </tbody></table>
+    <p>از ریشهٔ مخزن می‌توان صفحه‌ها را دوباره تولید و آزمون قواعد را اجرا کرد. برای اجرای یک ثبت‌نام تازه از راهنمای Docker و محیط آزمایشی استفاده کنید.</p>
+    <pre dir="ltr"><code>python scripts/build-university.py
+node --test integrations/homelable/term-review.test.mjs
+node copy-web.mjs</code></pre>
+  </section>
+  <section id="results" class="block">
+    <h2>نتایج مشاهده‌شده و حدود استناد</h2>
+    <table><thead><tr><th scope="col">آزمایش</th><th scope="col">نتیجه</th><th scope="col">دامنه و شاهد</th></tr></thead><tbody>
+      <tr><th scope="row">عضویت ۱۰۰ پرونده</th><td>۱۰۰ رسید و عضویت با برنامهٔ نیمسال تطبیق داشت.</td><td>دانشجویان ساختگی در محیط محلی. <a href="/docs/seminar-results.json">جدول نتایج</a></td></tr>
+      <tr><th scope="row">رقابت آخرین صندلی</th><td>اجرای n8n شمارهٔ ۵ منتقل شد. اجرای ۶ در گروه قبلی ماند. اشغال نهایی مقصد ۱ بود.</td><td>دو درخواست ساختگی. شناسه و عضویت هر دو در بخش <bdi>race</bdi> ثبت شده‌اند. <a href="/docs/seminar-results.json">شاهد ماشین‌خوان</a></td></tr>
+      <tr><th scope="row">ثبت‌نام شمارهٔ ۲۰</th><td>۲۸٫۶۳۳ ثانیه کل و ۱۴٫۵۳۶ ثانیه تحویل تا شروع n8n.</td><td>یک اجرای محلی. <a href="/docs/registration-trace.json">رد خام</a></td></tr>
+      <tr><th scope="row">CLI و worker روشن</th><td>میانه‌ها ۴۶٫۹۳۷ و ۴٫۸۱۱ ثانیه. میانهٔ صف اندازه‌گیری‌شده در Redis برابر ۶٫۷۵۵ میلی‌ثانیه بود.</td><td>سه مشاهدهٔ منتخب برای هر مسیر. نمونهٔ گرم‌کردن در جدول مشخص است. <a href="/docs/seminar-results.json">جدول مقایسه</a></td></tr>
+      <tr><th scope="row">بایگانی نقش‌ها</th><td>۲٬۰۰۰ ردیف اجرای موفق با ۲٬۰۰۰ شناسهٔ ساختگی در دفتر محلی تطبیق داشت.</td><td>وظایف گردش‌کار کنترل‌شده. اجرای هم‌زمان ۲٬۰۰۰ عامل یا فعالیت سرویس تولید اندازه‌گیری نشده است. <a href="/docs/article.html#system-assessment">تحلیل شواهد</a></td></tr>
+      <tr><th scope="row">بازپخش نیمسال</th><td>سناریوی پایه بدون یافته بود. فراغت زودرس، ظرفیت یک، عضویت تکراری و شواهد مفقود علامت خوردند.</td><td>آزمون ساختگی. شناسهٔ تکراری و عقب‌گرد زمان ورودی نامعتبر اعلام شدند. <a href="/docs/seminar-results.json">جدول بازپخش</a></td></tr>
+    </tbody></table>
+    <div class="stack evidence">
+      <figure><a href="/docs/paperclip-console.png"><img src="/docs/paperclip-console.png" alt="تصویر بایگانی‌شدهٔ کنسول Paperclip"></a><figcaption>کنسول Paperclip در محیط آزمایش. <a href="/dashboard.html">داشبورد و شواهد</a></figcaption></figure>
+      <figure><a href="/docs/n8n-execution-19.jpg"><img src="/docs/n8n-execution-19.jpg" alt="تصویر اجرای موفق شمارهٔ ۱۹ در n8n"></a><figcaption>تصویر تاریخی اجرای ۱۹. اعداد جدول بالا از اجرای ۲۰ آمده‌اند. <a href="/docs/registration-trace.json">رد اجرای ۲۰</a></figcaption></figure>
+      <figure><a href="/docs/docker-desktop.jpg"><img src="/docs/docker-desktop.jpg" alt="تصویر Docker Desktop در محیط اجرای آزمایشی"></a><figcaption>کانتینرهای محیط آزمایش در Docker Desktop. <a href="/topology/index.html?design=faran-infrastructure">دیاگرام سرویس‌ها</a></figcaption></figure>
+      <figure><a href="/docs/verified-organization.jpg"><img src="/docs/verified-organization.jpg" alt="نمای چارت تعاملی فاران در Homelable"></a><figcaption>چارت بازخوانی‌شده از منبع مؤسسه. <a href="/topology/index.html?design=faran-official-structure">همین چارت روی وب</a></figcaption></figure>
+    </div>
+    <p class="muted">پایلوت مستقل Kwant برای همین سناریوی صندلی در محیط محلی اجرا شد. شاهد سالم قبول شد و حذف عضویت مبدأ یا نبود شناسهٔ اجرا در بازبینی نمایان شد. این پایلوت اجرای تازه روی سامانهٔ آموزشی نبود. <a href="https://github.com/maddixmhn/faran/blob/master/integrations/kwant/check_seat_race.py">کد بررسی مستقل</a> · <a href="https://github.com/maddixmhn/faran/blob/master/integrations/kwant/pilot-result.json">رسید پایلوت</a></p>
+  </section>
+  <section id="defense" class="block">
+    <h2>ترتیب پیشنهادی دفاع</h2>
+    <ol><li>در دو دقیقه، خدمت آموزشی، مالک تصمیم و شاهد را در چارت نشان بدهید.</li><li>در سه دقیقه، مسیر Paperclip تا Moodle را با رد اجرای ۲۰ باز کنید و یک بازه را از مهرهای زمانی حساب کنید.</li><li>در سه دقیقه، آخرین صندلی را با دو شناسه و دو وضعیت نهایی توضیح دهید. روی باقی‌ماندن عضویت قبلی تأکید کنید.</li><li>در دو دقیقه، بازپخش نیمسال و تفاوت دادهٔ نمونه و اجرای محلی را توضیح دهید. برای پرسش ظرفیت، صفحهٔ مدل‌سازی درس ارزیابی را باز کنید.</li></ol>
+  </section>
+  <section id="sources" class="block">
+    <h2>منابع</h2>
+    <ul><li>ساختار و مقررات آموزشی. <a href="https://faran.ac.ir/faran-chart/">چارت رسمی مؤسسهٔ فاران</a> · <a href="https://faran.ac.ir/?page_id=3489">پرسش‌های تحصیلات تکمیلی</a></li><li>مبانی فنی و اجزا. <a href="https://docs.n8n.io/hosting/scaling/queue-mode/">مستند صف n8n</a> · <a href="https://docs.moodle.org/en/Groups">مستند گروه‌ها در Moodle</a> · <a href="https://github.com/paperclipai/paperclip">Paperclip</a> · <a href="https://github.com/Pouzor/homelable">Homelable</a></li><li>شواهد، روش و مستندات پروژه. <a href="/docs/article.html">مقاله</a> · <a href="/docs/faran-seminar.pdf">گزارش کامل</a> · <a href="https://github.com/maddixmhn/faran">مخزن فاران</a></li></ul>
+  </section>
+</main>
+<footer><div class="wrap"><span>درس سمینار · دانشگاه دیجیتال فاران</span><span class="publisher-credit" dir="ltr"><bdi lang="en">Powered by</bdi> <a href="https://github.com/maddixmhn" rel="me"><bdi dir="rtl">محمد مهرانی</bdi></a></span></div></footer>
+</body>
+</html>

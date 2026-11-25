@@ -1,0 +1,167 @@
+{
+  "schema": "faran/kwant-seat-race-pilot-v1",
+  "recorded_at_utc": "2026-11-25T19:41:58.661209+00:00",
+  "kwant": "kwnt 0.9.51",
+  "release": "mac-v0.9.51",
+  "archive_sha256": "62a26f44d56a8535295b3200acb45b89c62b48dc87818ed481afa9bc0858f580",
+  "input_unchanged": true,
+  "kwant_process_stopped": true,
+  "scenarios": {
+    "archive": {
+      "task_id": "1a403d2d-acea-42b4-bb9f-c4ee84ce2507",
+      "task_state": "ready",
+      "elapsed_ms": 479.84,
+      "source_sha256": "e7af4ffe56746c85c23261ae1d5d053bd91a97f7ebecd7571b14f694bc2e40fb",
+      "checks": [
+        {
+          "criterion": "single-transfer",
+          "id": "af493b96-c2d2-4daf-88c5-26a25fe868d0",
+          "status": "passed",
+          "checked_by": "kwant",
+          "evidence_id": "47434638-8410-4a03-8580-ec3cb6f8bf8d",
+          "detail": {
+            "status": "pass",
+            "detail": "One consistent transfer must occupy the last seat.",
+            "evidence": {
+              "moved_count": 1,
+              "final_occupancy": 1,
+              "observed_targets": 1
+            }
+          }
+        },
+        {
+          "criterion": "origin-preserved",
+          "id": "a5b4f418-0122-4704-bcc6-c8bd0e76a8b3",
+          "status": "passed",
+          "checked_by": "kwant",
+          "evidence_id": "63a13aaa-730e-4502-9a89-2e97d8869f9e",
+          "detail": {
+            "status": "pass",
+            "detail": "One losing request must keep its original membership only.",
+            "evidence": {}
+          }
+        },
+        {
+          "criterion": "traceable-requests",
+          "id": "c40d0bee-b953-47a9-8788-8f9f3f167922",
+          "status": "passed",
+          "checked_by": "kwant",
+          "evidence_id": "cfef8214-8617-4e5f-8e4e-6cdc3e17b02d",
+          "detail": {
+            "status": "pass",
+            "detail": "Both requests link to distinct executions with overlapping observed intervals.",
+            "evidence": {
+              "request_executions": {
+                "bda74bcc3c894d7dbb506d92a3c1bcf4-0": "5",
+                "bda74bcc3c894d7dbb506d92a3c1bcf4-1": "6"
+              },
+              "overlap_ms": 1021.865
+            }
+          }
+        }
+      ]
+    },
+    "origin-lost": {
+      "task_id": "aaa764e3-fcfd-458e-9ed6-e87730914849",
+      "task_state": "ready",
+      "elapsed_ms": 418.681,
+      "source_sha256": "35832cf7bab2ceb162f66d28ab475d608487915ae5a9bad6e034f54c60683b95",
+      "checks": [
+        {
+          "criterion": "single-transfer",
+          "id": "5e9a0364-65cd-406d-a5df-bb030c5d87a3",
+          "status": "passed",
+          "checked_by": "kwant",
+          "evidence_id": "f07cd3fa-5188-402e-9775-4a00b19b28c6",
+          "detail": {
+            "status": "pass",
+            "detail": "One consistent transfer must occupy the last seat.",
+            "evidence": {
+              "moved_count": 1,
+              "final_occupancy": 1,
+              "observed_targets": 1
+            }
+          }
+        },
+        {
+          "criterion": "origin-preserved",
+          "id": "10b830e1-bf71-4eb1-94af-ce728048354d",
+          "status": "failed",
+          "checked_by": "kwant",
+          "evidence_id": "f99ce6ea-5537-4dca-ae16-ee94ff7d30f3",
+          "detail": {
+            "status": "fail",
+            "detail": "One losing request must keep its original membership only.",
+            "evidence": {}
+          }
+        },
+        {
+          "criterion": "traceable-requests",
+          "id": "a65b788a-9e66-4c06-948d-729d3c21b212",
+          "status": "passed",
+          "checked_by": "kwant",
+          "evidence_id": "2d58b361-7770-4f2f-afa2-a1905851cefc",
+          "detail": {
+            "status": "pass",
+            "detail": "Both requests link to distinct executions with overlapping observed intervals.",
+            "evidence": {
+              "request_executions": {
+                "bda74bcc3c894d7dbb506d92a3c1bcf4-0": "5",
+                "bda74bcc3c894d7dbb506d92a3c1bcf4-1": "6"
+              },
+              "overlap_ms": 1021.865
+            }
+          }
+        }
+      ]
+    },
+    "execution-missing": {
+      "task_id": "7145c2ec-2754-440a-b71d-b74e09519f62",
+      "task_state": "ready",
+      "elapsed_ms": 446.0,
+      "source_sha256": "13e67ccf3ef073bcb6869a711a4efe61e0843369580e610154d3530e267cb8cc",
+      "checks": [
+        {
+          "criterion": "single-transfer",
+          "id": "bc14cc26-e75a-41c6-aac5-3627aa71a8dc",
+          "status": "passed",
+          "checked_by": "kwant",
+          "evidence_id": "7c773684-a26e-4c36-89f7-65d7b679669e",
+          "detail": {
+            "status": "pass",
+            "detail": "One consistent transfer must occupy the last seat.",
+            "evidence": {
+              "moved_count": 1,
+              "final_occupancy": 1,
+              "observed_targets": 1
+            }
+          }
+        },
+        {
+          "criterion": "origin-preserved",
+          "id": "bc119b5a-fdef-447e-b159-bb94c25dbc49",
+          "status": "passed",
+          "checked_by": "kwant",
+          "evidence_id": "400ada61-01c3-4490-8253-70a8f16ebb5f",
+          "detail": {
+            "status": "pass",
+            "detail": "One losing request must keep its original membership only.",
+            "evidence": {}
+          }
+        },
+        {
+          "criterion": "traceable-requests",
+          "id": "8d06cf89-57d1-43f8-a938-ef71f58e1f8a",
+          "status": "failed",
+          "checked_by": "kwant",
+          "evidence_id": "a79b7968-005c-409d-bdd2-76017151029a",
+          "detail": {
+            "status": "insufficient",
+            "detail": "Race identity, execution identity or timing is missing.",
+            "evidence": {}
+          }
+        }
+      ]
+    }
+  }
+}

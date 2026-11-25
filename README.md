@@ -2,6 +2,8 @@
 
 <div align="center">
 
+[**صفحهٔ ارائهٔ درس**](https://faran-mu.vercel.app/docs/presentation.html) · [**دانلود جزوهٔ ارائه (PDF)**](https://faran-mu.vercel.app/docs/seminar-presentation.pdf)
+
 [**دانلود گزارش سمینار (PDF)**](https://faran-mu.vercel.app/docs/faran-seminar.pdf) · [**خواندن مقاله**](docs/article.html) · [**راهنمای فارسی Docker**](docs/QUICKSTART-FA.md)
 
 </div>

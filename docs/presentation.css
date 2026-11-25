@@ -1,0 +1,24 @@
+@font-face{font-family:Vazirmatn;src:url("/topology/brand/Vazirmatn.woff2") format("woff2");font-style:normal;font-weight:100 900;font-display:swap}
+:root{color-scheme:light;--ink:#182a39;--muted:#465c6e;--line:#d7e3e8;--accent:#136765;--soft:#eef7f6;--paper:#f6f9fa}
+body.evaluation{--accent:#51358d;--soft:#f1ecfa;--line:#ded6ec;--paper:#f8f6fc}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.9 Vazirmatn,Tahoma,sans-serif}
+a{color:var(--accent);text-underline-offset:.18em}a:focus-visible{outline:3px solid var(--accent);outline-offset:4px}a:hover{text-decoration-thickness:2px}
+.wrap{width:min(1120px,100% - 2rem);margin-inline:auto}header{background:#122734;color:#fff;padding:1rem 0}body.evaluation header{background:#251b3e}
+header .wrap,footer .wrap,.links{display:flex;align-items:center;gap:.6rem 1rem;flex-wrap:wrap}
+header .wrap{justify-content:space-between}header a{color:#fff}header strong{font-weight:800}
+main{padding:1rem 0 2rem}.hero{padding:1.8rem 0 .9rem}.hero p{max-width:72ch}.meta,.muted,figcaption{color:var(--muted)}h1,h2,h3,p{margin:0 0 .65rem}h1{line-height:1.28;font-size:clamp(1.85rem,5vw,3.1rem)}h2{line-height:1.35;font-size:1.5rem}h3{font-size:1.11rem}
+.primary,.secondary{display:inline-block;border-radius:.48rem;padding:.55rem .9rem;line-height:1.38;border:1px solid var(--accent);font-weight:750;text-decoration:none}
+.primary{background:var(--accent);color:#fff}.secondary{background:#fff}
+.toc{padding:.6rem 0 1rem}.toc a{padding:.12rem .16rem}
+section.block{border:1px solid var(--line);background:#fff;border-radius:.9rem;padding:1.2rem;margin:0 0 1rem;scroll-margin-top:1rem}
+.stack{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.85rem}.card{border:1px solid var(--line);border-radius:.7rem;padding:.85rem;background:var(--paper)}
+table{border-collapse:collapse;width:100%;font-size:.94rem}td,th{padding:.5rem .62rem;text-align:start;vertical-align:top;border:1px solid var(--line)}thead{background:var(--soft)}tbody th{font-weight:750}caption{text-align:start;margin-bottom:.45rem;color:var(--muted)}
+.formula,pre{direction:ltr;text-align:left;unicode-bidi:isolate;background:var(--soft);border:1px solid var(--line);border-radius:.5rem;padding:.45rem .65rem;margin:.38rem 0 .6rem;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere;font:1rem/1.6 'Cambria Math','Segoe UI',Consolas,monospace}
+code,bdi{unicode-bidi:isolate}code{font-family:Consolas,monospace}ul,ol{margin:.35rem 0 .65rem;padding-inline-start:1.4rem}li{margin-block:.25rem}
+figure{margin:.25rem 0}.evidence img{display:block;width:100%;height:clamp(125px,19vw,220px);object-fit:contain;background:#f2f4f7;border:1px solid var(--line);border-radius:.45rem}figcaption{margin-top:.35rem;font-size:.89rem}
+footer{padding:.8rem 0;background:#fff;border-top:1px solid var(--line)}footer .wrap{justify-content:space-between}
+@media(max-width:640px){section.block{padding:.8rem}.stack{grid-template-columns:1fr}td,th{padding:.35rem .38rem;font-size:.85rem}.formula,pre{font-size:.88rem}}
+@page{size:A4;margin:13mm 13mm 15mm;@bottom-center{content:counter(page) ' / ' counter(pages);font:9pt Tahoma}}
+@media print{body{background:#fff;color:#182a39;font-size:10.5pt}.wrap{width:100%}header{padding:0 0 2mm;background:#fff!important;color:inherit;border-bottom:1px solid #aaa}header a{color:inherit}main{padding:0}.hero{padding:3mm 0 1mm}h1{font-size:22pt}h2{font-size:15pt}h3{font-size:12pt}h2,h3{break-after:avoid}.toc,.print-hidden{display:none!important}section.block{margin:0 0 3mm;padding:3mm;border:none;border-top:1px solid #ccc;border-radius:0}tr,figure,.card,.formula,pre{break-inside:avoid}thead{display:table-header-group}.evidence img{height:35mm}.primary,.secondary{background:none;color:#173b57;border:0;padding:0}a{color:#173b57}p{orphans:3;widows:3}}
+
+@media print{body.seminar{font-size:10.2pt;line-height:1.76}body.seminar section.block{padding:2mm}body.seminar .evidence img{height:31mm}}
