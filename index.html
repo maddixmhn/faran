@@ -1,41 +1,46 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>صفحهٔ اصلی | درگاه فاران</title>
-<meta name="description" content="مسیر مراجعه به دانشکده‌ها، پذیرش، آموزش و خدمات دانشجویی فاران مهر دانش.">
-<meta name="theme-color" content="#102d3b">
-<link rel="icon" href="/icon.svg">
-<link rel="manifest" href="/manifest.webmanifest">
-<link rel="stylesheet" href="/university.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="دانشکده‌ها و خدمات مؤسسه را مرور کنید یا وارد دانشگاه آزمایشی شوید و فرایندهای نیمسال را تا نتیجهٔ ثبت‌نام دنبال کنید.">
+  <meta name="theme-color" content="#0c2929">
+  <title>دانشگاه دیجیتال فاران</title>
+  <link rel="icon" href="/icon.svg">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="stylesheet" href="/studio.css">
+  <script src="/studio.js" defer></script>
+  <script> if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => {});</script>
 </head>
-<body><a class="skip" href="#main">رفتن به محتوا</a>
-<header>
-  <div class="utilities"><div class="wrap">
-    <a href="https://faran.ac.ir/">سایت رسمی مؤسسه ↗</a><a href="https://faranlms.com/">پرتال دانشجویان ↗</a><a href="https://faran.ac.ir/teachers-portal/">پرتال استادان ↗</a>
-  </div></div>
-  <div class="wrap identity-nav">
-    <a class="identity" href="/"><img src="/topology/brand/faran-reference.webp" width="48" height="48" alt="">
-      <span><strong>درگاه دانشگاهی فاران</strong><small>پروژهٔ آموزشی بر پایهٔ ساختار فاران مهر دانش</small></span>
-    </a>
-    <nav aria-label="منوی اصلی"><a href="/" aria-current="page">خانه</a><a href="/university/about.html">دربارهٔ فاران</a><a href="/university/faculties.html">دانشکده‌ها</a><a href="/university/admissions.html">پذیرش</a><a href="/university/education.html">آموزش</a><a href="/university/research.html">پژوهش</a><a href="/university/student-services.html">خدمات دانشجویی</a><a href="/university/contact.html">تماس</a></nav>
-  </div>
-</header>
-<main id="main" tabindex="-1">
-    <section class="hero"><div class="wrap hero-grid">
-      <div><p class="kicker">مؤسسهٔ آموزش عالی فاران مهر دانش</p><h1>راهنمای دانشگاه و<br>خدمات آموزشی</h1><p>مسیر مراجعه به دانشکده‌ها، پذیرش، آموزش و خدمات دانشجویی فاران مهر دانش.</p>
-        <div class="actions"><a href="/university/admissions.html" class="button" >راهنمای پذیرش</a><a href="/university/faculties.html" class="button secondary" >مشاهدهٔ دانشکده‌ها</a></div>
+<body class="studio-page studio-faran">
+  <header class="studio-nav"><div class="studio-wrap">
+    <a class="studio-ident" href="/"><span class="studio-mark" aria-hidden="true">ف</span>دانشگاه دیجیتال فاران</a>
+    <nav aria-label="منوی اصلی"><a href="#services">خدمات دانشگاه</a><a href="#tools">میزکار و ابزارها</a><a href="/docs/presentation.html">ارائهٔ سمینار</a><a href="#downloads">دانلود</a><a href="/login.html" class="studio-btn">ورود به داشبورد</a></nav>
+  </div></header>
+  <main class="studio-wrap">
+    <section class="studio-hero">
+      <div><p class="studio-eyebrow">سمینار · دکتر سعید شکراللهی</p>
+        <h1>فاران، از درگاه دانشگاه تا میزکار آموزش</h1><p>دانشکده‌ها و خدمات مؤسسه را مرور کنید یا وارد دانشگاه آزمایشی شوید و فرایندهای نیمسال را تا نتیجهٔ ثبت‌نام دنبال کنید.</p>
+        <div class="studio-actions"><a href="/login.html" class="studio-btn">ورود به داشبورد آزمایشی</a><a href="https://faranlms.com/" class="studio-link">پرتال رسمی دانشجویان ↗</a><a href="https://faran.ac.ir/teachers-portal/" class="studio-link">پرتال استادان ↗</a><a href="https://faran.ac.ir/" class="studio-link">سایت مؤسسه ↗</a></div>
       </div>
-      <aside class="portal"><h2>پرتال‌های دانشگاه</h2>
-        <a href="https://faranlms.com/">پرتال آموزشی دانشجویان ↗</a><a href="https://faran.ac.ir/teachers-portal/">پرتال استادان ↗</a><a href="https://faran.ac.ir/ocr/">رزرو زمان کلاس ↗</a><a href="https://faran.ac.ir/">اطلاعیه‌های رسمی ↗</a>
-      </aside>
-    </div></section>
-    <section class="wrap shelf" id="services"><h2>خدمات دانشگاه</h2><ul class="cards "><li><a class="service" href="/university/admissions.html"><strong>پذیرش و ثبت‌نام</strong><span>راهنمای ورودی کارشناسی و کارشناسی ارشد و اطلاعیه‌های ثبت‌نام.</span><small>مشاهده <span aria-hidden="true">←</span></small></a></li><li><a class="service" href="/university/education.html"><strong>آموزش و امتحانات</strong><span>آیین‌نامه‌ها، تقویم نیمسال، کلاس مجازی و راهنمای آزمون.</span><small>مشاهده <span aria-hidden="true">←</span></small></a></li><li><a class="service" href="/university/finance.html"><strong>شهریه و امور مالی</strong><span>جدول رسمی شهریه و مسیر پیگیری امور مالی.</span><small>مشاهده <span aria-hidden="true">←</span></small></a></li><li><a class="service" href="/university/research.html"><strong>پژوهش و کتابخانه</strong><span>معاونت پژوهشی، کتابخانهٔ دیجیتال و همایش‌ها.</span><small>مشاهده <span aria-hidden="true">←</span></small></a></li><li><a class="service" href="/university/student-services.html"><strong>خدمات دانشجویی</strong><span>مسیر دریافت کارت، ویدئوهای راهنما و انجمن‌های علمی.</span><small>مشاهده <span aria-hidden="true">←</span></small></a></li><li><a class="service" href="/university/technology.html"><strong>فناوری و سامانه‌ها</strong><span>پرتال استاد، رزرو زمان کلاس و سامانهٔ آموزش مجازی.</span><small>مشاهده <span aria-hidden="true">←</span></small></a></li></ul></section>
-    <section class="faculty-band"><div class="wrap shelf"><h2>دانشکده‌ها</h2><ul class="cards grouped"><li><a class="service" href="/university/law.html"><strong>حقوق</strong><span>حقوق</span><small>مشاهده <span aria-hidden="true">←</span></small></a></li><li><a class="service" href="/university/languages.html"><strong>زبان‌های خارجی</strong><span>آموزش زبان انگلیسی، مترجمی زبان انگلیسی، مترجمی زبان انگلیسی (ناپیوسته)</span><small>مشاهده <span aria-hidden="true">←</span></small></a></li><li><a class="service" href="/university/engineering.html"><strong>مهندسی</strong><span>مهندسی کامپیوتر، مهندسی حرفه‌ای کامپیوتر نرم‌افزار (ناپیوسته)</span><small>مشاهده <span aria-hidden="true">←</span></small></a></li><li><a class="service" href="/university/economics.html"><strong>اقتصاد و حسابداری</strong><span>اقتصاد، حسابداری، حسابداری (ناپیوسته)</span><small>مشاهده <span aria-hidden="true">←</span></small></a></li><li><a class="service" href="/university/management.html"><strong>مدیریت</strong><span>مدیریت امور بانکی، مدیریت بازرگانی، مدیریت صنعتی، مدیریت کسب‌وکار، مدیریت مالی</span><small>مشاهده <span aria-hidden="true">←</span></small></a></li><li><a class="service" href="/university/social.html"><strong>خدمات اجتماعی</strong><span>مددکاری اجتماعی</span><small>مشاهده <span aria-hidden="true">←</span></small></a></li></ul></div></section>
-    <section class="wrap shelf"><h2>ساختار مؤسسه و پروژهٔ سمینار</h2><ul class="cards "><li><a class="service" href="/topology/index.html?design=faran-official-structure"><strong>نمودار سازمانی</strong><span>واحدهای فاران را در نقشهٔ تعاملی مرور کنید.</span><small>مشاهده <span aria-hidden="true">←</span></small></a></li><li><a class="service" href="/university/project.html"><strong>پروژهٔ دانشگاه دیجیتال</strong><span>داشبورد آزمایشی، مقاله و گزارش قابل دانلود.</span><small>مشاهده <span aria-hidden="true">←</span></small></a></li></ul></section></main>
-<footer><div class="wrap footer-row"><div><strong>درگاه دانشگاهی فاران</strong><p>پروژهٔ درس سمینار · محمد مهرانی</p></div>
-  <nav aria-label="پیوندهای پایین صفحه"><a href="/university/project.html">صفحهٔ پروژه</a><a href="/topology/index.html?design=faran-official-structure">نمودار سازمانی</a><a href="https://faran.ac.ir/">سایت رسمی مؤسسه ↗</a><a href="https://github.com/maddixmhn/faran">گیت‌هاب ↗</a></nav>
-</div><div class="publisher-credit" dir="ltr" style="grid-column:1/-1;flex:1 0 100%;text-align:center;padding:.5rem .75rem;font-size:.875rem"><bdi lang="en" dir="ltr">Powered by</bdi> <a href="https://github.com/maddixmhn" rel="me" style="color:inherit;text-decoration:underline"><bdi dir="rtl">محمد مهرانی</bdi></a></div></footer>
-<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => {});</script>
-</body></html>
+      <figure class="studio-media">
+        <a href="/topology/index.html?design=faran-official-structure"><img src="/docs/verified-organization.jpg" alt="نمای چارت سازمانی فاران در نقشهٔ تعاملی" fetchpriority="high" width="720" height="450"></a>
+        <figcaption><span>نمای چارت سازمانی فاران در نقشهٔ تعاملی</span><a href="/topology/index.html?design=faran-official-structure">باز کردن چارت سازمانی</a></figcaption>
+      </figure>
+    </section>
+    <section class="studio-summary" data-project-status aria-label="آخرین شواهد منتشرشده">
+      <h3>شواهد ثبت‌شده</h3><p data-studio-message role="status">در حال خواندن خلاصهٔ شواهد…</p>
+      <dl data-studio-metrics hidden></dl>
+      <noscript><p>برای دیدن خلاصه، جاوااسکریپت را فعال کنید یا رد خام را باز کنید.</p></noscript>
+      <a href="/docs/registration-trace.json">باز کردن رد ثبت‌نام ↗</a>
+    </section>
+    <section class="studio-content" id="services"><h2>خدمات دانشگاه</h2><div class="studio-services"><a class="studio-card" data-studio-tool href="/university/admissions.html"><strong>پذیرش و ثبت‌نام</strong><span>راهنمای ورودی‌های کارشناسی و کارشناسی ارشد.</span><small>پذیرش <span aria-hidden="true">↗</span></small></a><a class="studio-card" data-studio-tool href="/university/education.html"><strong>آموزش و امتحانات</strong><span>مقررات، راهنمای آزمون و مسیر پیگیری آموزش.</span><small>آموزش <span aria-hidden="true">↗</span></small></a><a class="studio-card" data-studio-tool href="/university/finance.html"><strong>شهریه و امور مالی</strong><span>جدول شهریه و مسیر پیگیری پرسش‌های مالی.</span><small>مالی <span aria-hidden="true">↗</span></small></a><a class="studio-card" data-studio-tool href="/university/research.html"><strong>پژوهش و کتابخانه</strong><span>معاونت پژوهشی، کتابخانه و همایش‌ها.</span><small>پژوهش <span aria-hidden="true">↗</span></small></a><a class="studio-card" data-studio-tool href="/university/student-services.html"><strong>خدمات دانشجویی</strong><span>کارت دانشجویی، راهنما و انجمن‌ها.</span><small>دانشجو <span aria-hidden="true">↗</span></small></a><a class="studio-card" data-studio-tool href="/university/technology.html"><strong>فناوری و سامانه‌ها</strong><span>آموزش مجازی و پرتال استادان.</span><small>سامانه‌ها <span aria-hidden="true">↗</span></small></a><a class="studio-card" data-studio-tool href="/university/about.html"><strong>دربارهٔ مؤسسه</strong><span>معرفی، چارت، ساختار و ریاست دانشگاه.</span><small>دانشگاه <span aria-hidden="true">↗</span></small></a><a class="studio-card" data-studio-tool href="/university/contact.html"><strong>تماس با فاران</strong><span>مسیر تماس و پیگیری درخواست در مؤسسه.</span><small>ارتباط <span aria-hidden="true">↗</span></small></a></div></section>
+    <section class="studio-content" id="tools"><h2>ابزارها و میزکار</h2><div class="studio-services"><a class="studio-card" data-studio-tool href="/docs/semester-web.html"><strong>میزکار نیمسال</strong><span>ثبت‌نام، انتخاب واحد، آزمون و پیگیری پروندهٔ نمونه.</span><small>آموزش <span aria-hidden="true">↗</span></small></a><a class="studio-card" data-studio-tool href="/topology/index.html?design=faran-official-structure"><strong>چارت رسمی فاران</strong><span>دانشکده‌ها، معاونت‌ها و پیوندهای سازمانی.</span><small>سازمان <span aria-hidden="true">↗</span></small></a><a class="studio-card" data-studio-tool href="/topology/index.html?design=faran-infrastructure"><strong>نقشهٔ محیط اجرا</strong><span>ارتباط Paperclip، n8n، Redis و Moodle.</span><small>زیرساخت <span aria-hidden="true">↗</span></small></a><a class="studio-card" data-studio-tool href="/topology/term-review.html"><strong>بررسی حذف نیمسال</strong><span>کنترل زمان درخواست و شاهد تصمیم آموزشی.</span><small>آموزش <span aria-hidden="true">↗</span></small></a><a class="studio-card" data-studio-tool href="/docs/registration-trace.json"><strong>رد اجرای ثبت‌نام</strong><span>زمان‌های ثبت‌شده در سه مرحله با شناسهٔ مشترک.</span><small>دادهٔ JSON <span aria-hidden="true">↗</span></small></a><a class="studio-card" data-studio-tool href="/docs/seminar-results.json"><strong>نتایج آزمایش‌ها</strong><span>شواهد عضویت، آخرین صندلی و مقایسهٔ worker.</span><small>دادهٔ JSON <span aria-hidden="true">↗</span></small></a><a class="studio-card" data-studio-tool href="/university/faculties.html"><strong>دانشکده‌ها و رشته‌ها</strong><span>گروه‌های آموزشی، رشته‌ها و منابع مؤسسه.</span><small>دانشگاه <span aria-hidden="true">↗</span></small></a><a class="studio-card" data-studio-tool href="/topology/campus-sources.html"><strong>راهنمای منابع فاران</strong><span>نقش واحدها و مراجع آموزشی و سازمانی.</span><small>منابع <span aria-hidden="true">↗</span></small></a><a class="studio-card" data-studio-tool href="https://dr-soleimani-evaluator.vercel.app/"><strong>ارزیاب مستقل</strong><span>محاسبهٔ سنجه‌ها و بررسی شواهد فاران.</span><small>پروژهٔ همراه <span aria-hidden="true">↗</span></small></a></div></section>
+    <section class="studio-content" id="downloads"><h2>نسخه‌ها و ارائهٔ درس</h2><div class="studio-services"><a class="studio-card" data-studio-tool href="https://github.com/maddixmhn/faran/releases/download/android-v1.3.0/faran-1.3.0.apk"><strong>برنامهٔ اندروید فاران</strong><span>نسخهٔ ۱٫۳٫۰، نصب مستقیم روی Android ۷ و بالاتر.</span><small>APK <span aria-hidden="true">↗</span></small></a><a class="studio-card" data-studio-tool href="/docs/presentation.html"><strong>ارائهٔ درس سمینار</strong><span>فرمول‌ها، کد و ترتیب دفاع.</span><small>ارائه <span aria-hidden="true">↗</span></small></a><a class="studio-card" data-studio-tool href="/docs/seminar-presentation.pdf"><strong>جزوهٔ ارائه</strong><span>نسخهٔ چهارصفحه‌ای آمادهٔ دفاع.</span><small>PDF <span aria-hidden="true">↗</span></small></a><a class="studio-card" data-studio-tool href="/docs/faran-seminar.pdf"><strong>گزارش کامل سمینار</strong><span>روش پژوهش، نتایج و پیوست‌ها.</span><small>PDF <span aria-hidden="true">↗</span></small></a><a class="studio-card" data-studio-tool href="/docs/article.html"><strong>مقالهٔ وب</strong><span>شرح پروژه و تحلیل شواهد.</span><small>مقاله <span aria-hidden="true">↗</span></small></a><a class="studio-card" data-studio-tool href="/docs/QUICKSTART-FA.md"><strong>نصب و کد پروژه</strong><span>راهنمای فارسی و مسیر اجرای محلی با Docker.</span><small>راهنما <span aria-hidden="true">↗</span></small></a></div></section>
+  </main>
+  <footer class="studio-footer"><div class="studio-wrap"><strong>دانشگاه دیجیتال فاران</strong>
+    <nav aria-label="پیوندهای پروژه"><a href="https://dr-soleimani-evaluator.vercel.app">ارزیاب دکتر سلیمانی</a><a href="https://github.com/maddixmhn/faran">گیت‌هاب</a></nav>
+    <span class="publisher-credit" dir="ltr"><bdi lang="en">Powered by</bdi> <a href="https://github.com/maddixmhn" rel="me"><bdi dir="rtl">محمد مهرانی</bdi></a></span>
+  </div></footer>
+</body>
+</html>

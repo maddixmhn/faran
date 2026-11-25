@@ -2,7 +2,7 @@ import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 const web = new URL('./www/', import.meta.url);
 await rm(web, { recursive: true, force: true });
 await mkdir(web, { recursive: true });
-const files = ['index.html', 'login.html', 'dashboard.html', 'site.css', 'university.css', 'app.js', 'sw.js', 'manifest.webmanifest', 'icon.svg'];
+const files = ['index.html', 'login.html', 'dashboard.html', 'site.css', 'university.css', 'app.js', 'studio.css', 'studio.js', 'sw.js', 'manifest.webmanifest', 'icon.svg'];
 files.push(
   'docs/AGENT-SKILLS-CATALOG.md',
   'docs/ARTICLE.md',
@@ -17,6 +17,7 @@ files.push(
   'docs/WORKFLOW-ARCHITECTURE.md',
   'docs/WORKFLOW-ROADMAP.md',
   'docs/article.html',
+  'docs/project-status.json',
   'docs/presentation.html',
   'docs/presentation.css',
   'docs/seminar-presentation.pdf',

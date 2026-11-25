@@ -1,0 +1,191 @@
+{
+  "name": "دانشگاه دیجیتال فاران",
+  "mark": "ف",
+  "theme": "faran",
+  "course": "سمینار · دکتر سعید شکراللهی",
+  "headline": "فاران، از درگاه دانشگاه تا میزکار آموزش",
+  "intro": "دانشکده‌ها و خدمات مؤسسه را مرور کنید یا وارد دانشگاه آزمایشی شوید و فرایندهای نیمسال را تا نتیجهٔ ثبت‌نام دنبال کنید.",
+  "image": "/docs/verified-organization.jpg",
+  "imageAlt": "نمای چارت سازمانی فاران در نقشهٔ تعاملی",
+  "preview": "/topology/index.html?design=faran-official-structure",
+  "previewLabel": "باز کردن چارت سازمانی",
+  "peer": "https://dr-soleimani-evaluator.vercel.app",
+  "peerName": "ارزیاب دکتر سلیمانی",
+  "github": "https://github.com/maddixmhn/faran",
+  "nav": [
+    [
+      "خدمات دانشگاه",
+      "#services"
+    ],
+    [
+      "میزکار و ابزارها",
+      "#tools"
+    ],
+    [
+      "ارائهٔ سمینار",
+      "/docs/presentation.html"
+    ],
+    [
+      "دانلود",
+      "#downloads"
+    ]
+  ],
+  "primary": [
+    [
+      "پرتال رسمی دانشجویان ↗",
+      "https://faranlms.com/"
+    ],
+    [
+      "پرتال استادان ↗",
+      "https://faran.ac.ir/teachers-portal/"
+    ],
+    [
+      "سایت مؤسسه ↗",
+      "https://faran.ac.ir/"
+    ]
+  ],
+  "tools": [
+    [
+      "میزکار نیمسال",
+      "ثبت‌نام، انتخاب واحد، آزمون و پیگیری پروندهٔ نمونه.",
+      "/docs/semester-web.html",
+      "آموزش"
+    ],
+    [
+      "چارت رسمی فاران",
+      "دانشکده‌ها، معاونت‌ها و پیوندهای سازمانی.",
+      "/topology/index.html?design=faran-official-structure",
+      "سازمان"
+    ],
+    [
+      "نقشهٔ محیط اجرا",
+      "ارتباط Paperclip، n8n، Redis و Moodle.",
+      "/topology/index.html?design=faran-infrastructure",
+      "زیرساخت"
+    ],
+    [
+      "بررسی حذف نیمسال",
+      "کنترل زمان درخواست و شاهد تصمیم آموزشی.",
+      "/topology/term-review.html",
+      "آموزش"
+    ],
+    [
+      "رد اجرای ثبت‌نام",
+      "زمان‌های ثبت‌شده در سه مرحله با شناسهٔ مشترک.",
+      "/docs/registration-trace.json",
+      "دادهٔ JSON"
+    ],
+    [
+      "نتایج آزمایش‌ها",
+      "شواهد عضویت، آخرین صندلی و مقایسهٔ worker.",
+      "/docs/seminar-results.json",
+      "دادهٔ JSON"
+    ],
+    [
+      "دانشکده‌ها و رشته‌ها",
+      "گروه‌های آموزشی، رشته‌ها و منابع مؤسسه.",
+      "/university/faculties.html",
+      "دانشگاه"
+    ],
+    [
+      "راهنمای منابع فاران",
+      "نقش واحدها و مراجع آموزشی و سازمانی.",
+      "/topology/campus-sources.html",
+      "منابع"
+    ],
+    [
+      "ارزیاب مستقل",
+      "محاسبهٔ سنجه‌ها و بررسی شواهد فاران.",
+      "https://dr-soleimani-evaluator.vercel.app/",
+      "پروژهٔ همراه"
+    ]
+  ],
+  "services": [
+    [
+      "پذیرش و ثبت‌نام",
+      "راهنمای ورودی‌های کارشناسی و کارشناسی ارشد.",
+      "/university/admissions.html",
+      "پذیرش"
+    ],
+    [
+      "آموزش و امتحانات",
+      "مقررات، راهنمای آزمون و مسیر پیگیری آموزش.",
+      "/university/education.html",
+      "آموزش"
+    ],
+    [
+      "شهریه و امور مالی",
+      "جدول شهریه و مسیر پیگیری پرسش‌های مالی.",
+      "/university/finance.html",
+      "مالی"
+    ],
+    [
+      "پژوهش و کتابخانه",
+      "معاونت پژوهشی، کتابخانه و همایش‌ها.",
+      "/university/research.html",
+      "پژوهش"
+    ],
+    [
+      "خدمات دانشجویی",
+      "کارت دانشجویی، راهنما و انجمن‌ها.",
+      "/university/student-services.html",
+      "دانشجو"
+    ],
+    [
+      "فناوری و سامانه‌ها",
+      "آموزش مجازی و پرتال استادان.",
+      "/university/technology.html",
+      "سامانه‌ها"
+    ],
+    [
+      "دربارهٔ مؤسسه",
+      "معرفی، چارت، ساختار و ریاست دانشگاه.",
+      "/university/about.html",
+      "دانشگاه"
+    ],
+    [
+      "تماس با فاران",
+      "مسیر تماس و پیگیری درخواست در مؤسسه.",
+      "/university/contact.html",
+      "ارتباط"
+    ]
+  ],
+  "downloads": [
+    [
+      "برنامهٔ اندروید فاران",
+      "نسخهٔ ۱٫۳٫۰، نصب مستقیم روی Android ۷ و بالاتر.",
+      "https://github.com/maddixmhn/faran/releases/download/android-v1.3.0/faran-1.3.0.apk",
+      "APK"
+    ],
+    [
+      "ارائهٔ درس سمینار",
+      "فرمول‌ها، کد و ترتیب دفاع.",
+      "/docs/presentation.html",
+      "ارائه"
+    ],
+    [
+      "جزوهٔ ارائه",
+      "نسخهٔ چهارصفحه‌ای آمادهٔ دفاع.",
+      "/docs/seminar-presentation.pdf",
+      "PDF"
+    ],
+    [
+      "گزارش کامل سمینار",
+      "روش پژوهش، نتایج و پیوست‌ها.",
+      "/docs/faran-seminar.pdf",
+      "PDF"
+    ],
+    [
+      "مقالهٔ وب",
+      "شرح پروژه و تحلیل شواهد.",
+      "/docs/article.html",
+      "مقاله"
+    ],
+    [
+      "نصب و کد پروژه",
+      "راهنمای فارسی و مسیر اجرای محلی با Docker.",
+      "/docs/QUICKSTART-FA.md",
+      "راهنما"
+    ]
+  ]
+}

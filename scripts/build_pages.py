@@ -4,7 +4,7 @@ from shutil import copy2, copytree
 root = Path(__file__).resolve().parent.parent
 output = root / "pages-dist"
 (output / "docs").mkdir(parents=True, exist_ok=True)
-for filename in ("index.html", "login.html", "dashboard.html", "app.js", "site.css", "university.css", "style.css", "core.mjs", "sw.js", "manifest.webmanifest", "icon.svg"):
+for filename in ("index.html", "login.html", "dashboard.html", "studio.css", "studio.js", "app.js", "site.css", "university.css", "style.css", "core.mjs", "sw.js", "manifest.webmanifest", "icon.svg"):
     source = root / filename
     if source.is_file():
         copy2(source, output / filename)

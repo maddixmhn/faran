@@ -2,6 +2,8 @@
 from html import escape
 from pathlib import Path
 
+from studio_layout import render_home
+
 ROOT = Path(__file__).resolve().parents[1]
 OFFICIAL = "https://faran.ac.ir/"
 GITHUB = "https://github.com/maddixmhn/faran"
@@ -150,30 +152,6 @@ def frame(title, intro, current, body):
 </body></html>
 '''
 
-def home():
-    services = [item("پذیرش و ثبت‌نام", "راهنمای ورودی کارشناسی و کارشناسی ارشد و اطلاعیه‌های ثبت‌نام.", route("admissions")),
-                item("آموزش و امتحانات", "آیین‌نامه‌ها، تقویم نیمسال، کلاس مجازی و راهنمای آزمون.", route("education")),
-                item("شهریه و امور مالی", "جدول رسمی شهریه و مسیر پیگیری امور مالی.", route("finance")),
-                item("پژوهش و کتابخانه", "معاونت پژوهشی، کتابخانهٔ دیجیتال و همایش‌ها.", route("research")),
-                item("خدمات دانشجویی", "مسیر دریافت کارت، ویدئوهای راهنما و انجمن‌های علمی.", route("student-services")),
-                item("فناوری و سامانه‌ها", "پرتال استاد، رزرو زمان کلاس و سامانهٔ آموزش مجازی.", route("technology"))]
-    intro = "مسیر مراجعه به دانشکده‌ها، پذیرش، آموزش و خدمات دانشجویی فاران مهر دانش."
-    body = f'''
-    <section class="hero"><div class="wrap hero-grid">
-      <div><p class="kicker">مؤسسهٔ آموزش عالی فاران مهر دانش</p><h1>راهنمای دانشگاه و<br>خدمات آموزشی</h1><p>{intro}</p>
-        <div class="actions">{link("راهنمای پذیرش", route("admissions"), ' class="button" ')}{link("مشاهدهٔ دانشکده‌ها", route("faculties"), ' class="button secondary" ')}</div>
-      </div>
-      <aside class="portal"><h2>پرتال‌های دانشگاه</h2>
-        {link("پرتال آموزشی دانشجویان ↗", LMS)}{link("پرتال استادان ↗", TEACHERS)}{link("رزرو زمان کلاس ↗", OFFICIAL + "ocr/")}{link("اطلاعیه‌های رسمی ↗", OFFICIAL)}
-      </aside>
-    </div></section>
-    <section class="wrap shelf" id="services"><h2>خدمات دانشگاه</h2>{cards(services)}</section>
-    <section class="faculty-band"><div class="wrap shelf"><h2>دانشکده‌ها</h2>{cards(faculty_cards, True)}</div></section>
-    <section class="wrap shelf"><h2>ساختار مؤسسه و پروژهٔ سمینار</h2>{cards([
-        item("نمودار سازمانی", "واحدهای فاران را در نقشهٔ تعاملی مرور کنید.", MAP),
-        item("پروژهٔ دانشگاه دیجیتال", "داشبورد آزمایشی، مقاله و گزارش قابل دانلود.", route("project"))])}</section>'''
-    return frame("صفحهٔ اصلی", intro, "/", body)
-
 def page(slug, title, intro, items):
     current = route(slug)
     faculty_ancestor = link("دانشکده‌ها", route("faculties")) + "<span>/</span>" if slug in faculties else ""
@@ -195,7 +173,7 @@ def page(slug, title, intro, items):
 
 def main():
     (ROOT / "university").mkdir(exist_ok=True)
-    (ROOT / "index.html").write_text(home(), encoding="utf-8")
+    (ROOT / "index.html").write_text(render_home(), encoding="utf-8")
     for slug, (title, intro, items) in pages.items():
         (ROOT / "university" / f"{slug}.html").write_text(page(slug, title, intro, items), encoding="utf-8")
     print(f"Rendered {len(pages) + 1} public university pages.")
