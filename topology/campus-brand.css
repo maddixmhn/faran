@@ -1,0 +1,46 @@
+@font-face {
+  font-family: Vazirmatn;
+  src: url('./brand/Vazirmatn.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+.campus-nav {
+  font-family: Vazirmatn, system-ui, sans-serif;
+  gap: .65rem 1.1rem;
+  background: linear-gradient(110deg, #0d2341, #102e50 58%, #15385d);
+  color: #f2f7fa;
+  border-color: #284d73;
+}
+.campus-nav a { text-underline-offset: .25em; }
+.campus-nav a:focus-visible, .campus-nav button:focus-visible, .campus-nav input:focus-visible {
+  outline: 2px solid #a4e3ff;
+  outline-offset: 2px;
+}
+.campus-identity { display:flex; align-items:center; gap:.6rem; line-height:1.3; }
+.campus-identity img { width:72px; height:42px; object-fit:contain; padding:3px; border-radius:.45rem; background:#fff; }
+.campus-identity strong { display:block; font-size:.9rem; }
+.campus-identity small { color:#c0d9eb; font-size:.67rem; }
+body:has(.campus-nav) .react-flow__node, body:has(.campus-nav) .react-flow__edgelabel-renderer {
+  font-family: Vazirmatn, system-ui, sans-serif;
+}
+@media (max-width: 580px) {
+  .campus-nav { gap: .45rem .8rem; padding: .45rem .6rem; }
+  .campus-identity { width:100%; }
+  .campus-identity img { width:58px; height:34px; }
+}
+
+.campus-sources { color-scheme:dark; background:#101b2d; color:#f3f6fb; margin:0; font:1rem/1.85 Vazirmatn, system-ui, sans-serif; }
+.campus-sources a { color:#9de2ff; text-underline-offset:.25em; }
+.campus-sources header, .campus-sources main, .campus-sources footer { width:min(70rem,calc(100% - 2.5rem)); margin:auto; }
+.campus-sources header { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:.7rem; padding:1rem 0; border-bottom:1px solid #35516d; }
+.campus-sources h1 { font-size:clamp(1.75rem,4vw,2.8rem); line-height:1.35; margin-bottom:.6rem; }
+.campus-sources h2 { font-size:1.05rem; margin:0; }
+.campus-sources p { margin:.5rem 0 1rem; max-width:67ch; }
+.campus-sources section { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr)); gap:1rem; margin:1.5rem 0; }
+.campus-sources article { padding:1.05rem; background:#162940; border:1px solid #35516d; border-radius:.75rem; }
+.campus-sources article p { color:#dfebf5; margin:.3rem 0 .8rem; }
+.campus-sources footer { padding-bottom:2rem; color:#c0d9eb; }
+.campus-shortcuts { display:flex; flex-wrap:wrap; gap:.5rem; }
+.campus-shortcuts a { border:1px solid #35516d; border-radius:.5rem; padding:.25rem .65rem; }

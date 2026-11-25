@@ -2,7 +2,7 @@ import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 const web = new URL('./www/', import.meta.url);
 await rm(web, { recursive: true, force: true });
 await mkdir(web, { recursive: true });
-const files = ['index.html', 'login.html', 'dashboard.html', 'site.css', 'app.js', 'sw.js', 'manifest.webmanifest', 'icon.svg'];
+const files = ['index.html', 'login.html', 'dashboard.html', 'site.css', 'university.css', 'app.js', 'sw.js', 'manifest.webmanifest', 'icon.svg'];
 files.push(
   'docs/AGENT-SKILLS-CATALOG.md',
   'docs/ARTICLE.md',
@@ -17,6 +17,9 @@ files.push(
   'docs/WORKFLOW-ARCHITECTURE.md',
   'docs/WORKFLOW-ROADMAP.md',
   'docs/article.html',
+  'docs/verified-evaluation-lab.jpg',
+  'docs/verified-organization.jpg',
+  'docs/homelable-infrastructure.jpg',
   'docs/code-graph.json',
   'docs/docker-desktop.jpg',
   'docs/execution-evidence.json',
@@ -46,4 +49,6 @@ for (const file of files) {
   }
 }
 await cp(new URL('./android-documents.js', import.meta.url), new URL('android-documents.js', web));
+await cp(new URL('./university/', import.meta.url), new URL('university/', web), { recursive: true });
+await cp(new URL('./topology/', import.meta.url), new URL('topology/', web), { recursive: true });
 console.log('Android web assets synced.');

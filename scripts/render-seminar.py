@@ -9,9 +9,11 @@ import html
 import json
 import os
 import re
-import subprocess
 
 from pypdf import PdfReader
+from markdown_it import MarkdownIt
+from playwright.sync_api import sync_playwright
+from article_figures import FARAN, figure_links
 
 DOCS = Path(__file__).resolve().parents[1] / "docs"
 EDGE = Path(r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe")
@@ -30,6 +32,8 @@ REFERENCES = [
      "https://moodledev.io/docs/5.0/apis/subsystems/enrol"),
     ("PostgreSQL documentation. Explicit Locking.",
      "https://www.postgresql.org/docs/current/explicit-locking.html"),
+    ("Pouzor. (2026). Homelable v3.8.0. MIT-licensed software.",
+     "https://github.com/Pouzor/homelable/tree/v3.8.0"),
 ]
 IMAGE_NAMES = (
     ("service-graph.svg", "معماری ثبت‌نام و مرز مسئولیت سرویس‌ها"),
@@ -38,6 +42,9 @@ IMAGE_NAMES = (
     ("n8n-execution-19.jpg", "نمای مستقیم اجرای ۱۹ در n8n با وضعیت موفق و زمان ۸٫۳۲۴ ثانیه"),
     ("docker-desktop.jpg", "نمای مستقیم کانتینرهای روشن در Docker Desktop هنگام ثبت تصویر"),
     ("execution-evidence.png", "گزارش خروجی اجرای ۲۰۱۲ و تأیید عضویت فعال در درس ۴"),
+    ("homelable-infrastructure.jpg", "نقشهٔ وابستگی سرویس‌ها در ویرایشگر مستقل Homelable [۸]"),
+    ("verified-organization.jpg", "نمای عمومی چارت رسمی فاران، بازبینی ۲۵ نوامبر ۲۰۲۶"),
+    ("verified-evaluation-lab.jpg", "آزمایشگاه عمومی هنگام محاسبه از رد اجرای ثبت‌نام"),
 )
 STYLE = """
 @page {
@@ -66,6 +73,8 @@ th { background:#e8f0ed }
 tbody tr:nth-child(even) { background:#f6faf8 }
 .bar { background:#d7eee5; border-inline-start:3px solid #176750; min-width:2%; height:11px; margin-block:2px }
 .annex { break-before:page }
+.role-ledger td { padding-block:6pt; font-size:10pt; }
+.role-ledger .prefixes bdi { overflow-wrap:anywhere; }
 @media screen { body{max-width:820px;margin:auto;padding:18px} }
 """
 
@@ -169,7 +178,7 @@ def references():
 def figures():
     return '<h2>تصاویر محیط اجرا و معماری</h2>' + "".join(
         f'<figure><img src="{escape((DOCS / path).as_uri())}" alt="{escape(caption)}">'
-        f'<figcaption>شکل {number}. {escape(caption)}</figcaption></figure>'
+        f'<figcaption>شکل {number}. {escape(caption)}{figure_links(path, FARAN)}</figcaption></figure>'
         for number,(path,caption) in enumerate(IMAGE_NAMES,1)
     )
 
@@ -183,14 +192,43 @@ def appendix(roster):
              "تأیید" if r["receipt_matches"] and r["membership_verified"] else "نیازمند بررسی") for r in roster]
     return description + table(["پرونده","رشته","گروه آموزشی","مدرس","درس Moodle","گروه Moodle","نتیجه"],rows) + "</section>"
 
+def role_appendix(catalog):
+    records = catalog["records"]
+    assert len(records) == len({row["agent_id"] for row in records}) == 2000
+    managers = {"ceo": "مدیریت ارشد", "pm": "آموزش", "cto": "فناوری اطلاعات", "engineer": "مهندسی کامپیوتر"}
+    prefixes = {}
+    rows = []
+    for record in records:
+        prefix, role = record["task_id"].rsplit("/", 1)
+        assert role == record["agent_id"]
+        manager = record["manager"]
+        assert prefixes.setdefault(manager, prefix) == prefix
+        date, time = record["occurred_at"].split("T", 1)
+        status = "تکمیل" if record["status"] == "completed" else record["status"]
+        rows.append((role, managers[manager], record["execution"], date, time, status))
+    return (
+        '<section class="annex role-ledger"><h2>پیوست ب ـ دفتر اجرای تک‌تک نقش‌ها</h2>'
+        '<p>هر ردیف یک شناسهٔ متمایز نقش و ارجاع به اجرای بایگانی‌شدهٔ n8n دارد. دادهٔ نیمسال و نقش‌ها آزمایشی است. '
+        'زمان در قالب ISO و با مبدأ زمانی ثبت‌شده نگه داشته شده تا با رد اصلی تطبیق داده شود. '
+        'برای بازسازی شناسهٔ وظیفه، پیشوند شاخه و شناسهٔ نقش را با / به هم وصل کنید. '
+        '<a href="https://dr-soleimani-evaluator.vercel.app/lab/catalog.json">نسخهٔ ماشین‌خوان دفتر</a></p>'
+        + '<div class="prefixes">' + table(["شاخه", "پیشوند دقیق شناسهٔ وظیفه"],
+           [(managers[key], prefix) for key, prefix in prefixes.items()]) + "</div>"
+        + table(["نقش", "شاخهٔ مدیریت", "اجرای n8n", "تاریخ ISO", "ساعت و منطقه", "وضعیت"], rows) + "</section>"
+    )
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--body-only", action="store_true", help="Render the main report without the raw receipt table")
+    parser.add_argument("--catalog", type=Path, help="Public evaluator catalog for the per-role evidence appendix")
     args = parser.parse_args()
     evidence = json.loads((DOCS / "seminar-results.json").read_text(encoding="utf8"))
-    body = manuscript() + result_tables(evidence) + figures() + references()
+    evaluation = (DOCS / "SYSTEM-EVALUATION.md").read_text(encoding="utf-8")
+    body = manuscript() + MarkdownIt().enable("table").render(evaluation) + result_tables(evidence) + figures() + references()
     if not args.body_only:
         body += appendix(evidence["roster"])
+        if args.catalog:
+            body += role_appendix(json.loads(args.catalog.read_text(encoding="utf-8")))
     document = (f'<!doctype html><html lang="fa" dir="rtl"><meta charset="utf-8">'
                 f'<title>گزارش سمینار دانشگاه دیجیتال فاران</title><style>{STYLE}</style>'
                 f'<main>{body}</main></html>')
@@ -199,11 +237,18 @@ def main():
         source = folder / "print.html"
         source.write_text(document,encoding="utf8")
         candidate = folder / "rendered.pdf"
-        subprocess.run([
-            os.environ.get("FARAN_RENDER_BROWSER",str(EDGE)), "--headless", "--disable-gpu",
-            "--allow-file-access-from-files", "--no-pdf-header-footer", f"--user-data-dir={folder / 'browser'}",
-            f"--print-to-pdf={candidate}", source.as_uri(),
-        ],timeout=120,check=True)
+        with sync_playwright() as playwright:
+            browser = playwright.chromium.launch(
+                executable_path=os.environ.get("FARAN_RENDER_BROWSER", str(EDGE)),
+                args=["--allow-file-access-from-files"],
+            )
+            try:
+                page = browser.new_page()
+                page.set_default_timeout(120_000)
+                page.goto(source.as_uri(), wait_until="load")
+                page.pdf(path=candidate, prefer_css_page_size=True, print_background=True)
+            finally:
+                browser.close()
         pdf = PdfReader(candidate)
         assert len(pdf.pages) > 1
         assert sum(len(page.images) for page in pdf.pages) >= 4, "Screenshot evidence missing"

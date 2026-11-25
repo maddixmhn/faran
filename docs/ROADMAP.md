@@ -16,3 +16,7 @@ Visual direction: temporary, accessible Persian-first RTL command-line output an
 4. Dashboard: accessible RTL states for organization, tasks, runs, costs, evaluations, and schedules.
 5. Load and recovery evaluation: measure 2,000 mock identities and staged concurrency.
 6. Deployment package: only after destination, budget, secrets, and operations are specified.
+
+## درگاه دانشگاه
+
+مسیرهای عمومی مؤسسه و معیار آزمون صفحه‌های فارسی در [مستند ساختار فاران](FARAN-INSTITUTION.md#بازآرایی-درگاه-دانشگاه) ثبت شده‌اند. خانه به خدمات دانشجو و دانشکده‌ها اولویت می‌دهد. آزمایشگاه و شواهد در صفحهٔ پروژه در دسترس‌اند.

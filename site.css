@@ -65,3 +65,6 @@ footer{border-top:1px solid var(--studio-line);padding-block:20px}
 .release-links a{padding:.55rem .8rem;border:1px solid #cbd9d5;border-radius:8px;text-decoration:none;font-weight:bold}
 .release-links .release-pdf{background:#193d35;color:white;border-color:#193d35}.release-pdf small{margin-inline-start:.5rem}
 .release-links a:hover,.release-links a:focus-visible{text-decoration:underline}
+
+.topology-link{display:inline-flex;align-items:center;min-height:44px;padding:.35rem .7rem;border:1px solid currentColor;border-radius:.55rem;color:inherit;text-decoration:none;font-weight:650;font-size:.82rem}
+.topology-link:hover{text-decoration:underline}.topology-link:focus-visible{outline:2px solid currentColor;outline-offset:3px}

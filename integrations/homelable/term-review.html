@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>بررسی پروندهٔ حذف نیمسال | فاران</title>
+<link rel="stylesheet" href="./campus-brand.css">
+<style>
+:root{color-scheme:dark;font:16px/1.8 Vazirmatn,system-ui;background:#13191f;color:#e9eef2}
+body{max-width:48rem;margin:0 auto;padding:1.25rem}
+a{color:#86d7ed} h1{line-height:1.3} p{max-width:66ch}
+form{display:grid;gap:1rem;background:#1d2934;border:1px solid #395164;padding:1.25rem;border-radius:1rem}
+label{display:grid;gap:.2rem} label:first-child{display:flex;align-items:center}
+input,select,button{font:inherit;padding:.35rem .7rem;min-width:0} button{justify-self:start}
+output{display:block;background:#1d2934;border-inline-start:4px solid #86d7ed;padding:.8rem 1rem;margin-top:1rem}
+output[hidden]{display:none}
+</style>
+<nav><a href="./index.html?design=faran-official-academic-office">بازگشت به بوم آموزش</a></nav>
+<main>
+<h1>بررسی پروندهٔ حذف نیمسال کارشناسی ارشد</h1>
+<p>از تاریخ و ساعت تقویم پرونده به وقت تهران استفاده کنید. فقط اطلاعات آزمایشی وارد کنید. تصمیم با شورای آموزشی است و دادهٔ این فرم در مرورگر پردازش می‌شود.</p>
+<form id="case" method="post">
+  <label><input type="checkbox" name="written"> درخواست کتبی موجود است</label>
+  <label>زمان دریافت درخواست<input type="datetime-local" name="requestAt" dir="ltr"></label>
+  <label>زمان آغاز امتحانات<input type="datetime-local" name="examsAt" dir="ltr"></label>
+  <label>نتیجهٔ شورای آموزشی<select name="council">
+    <option value="pending">در انتظار تصمیم</option><option value="approved">تأیید</option><option value="rejected">رد</option>
+  </select></label>
+  <label>زمان تصمیم شورا<input type="datetime-local" name="decisionAt" dir="ltr"></label>
+  <label>شناسهٔ شاهد تصمیم<input name="reference" maxlength="80" autocomplete="off"></label>
+  <button type="submit" disabled>بررسی مدارک و ترتیب زمانی</button>
+</form>
+<output id="result" aria-live="polite" hidden></output>
+<p><a href="https://faran.ac.ir/?page_id=3489">پرسش‌های رسمی فاران دربارهٔ کارشناسی ارشد</a></p>
+</main>
+<script type="module">
+import { reviewTermWithdrawal } from './term-review.mjs';
+const form = document.getElementById('case');
+const output = document.getElementById('result');
+form.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const data = Object.fromEntries(new FormData(form));
+  const result = reviewTermWithdrawal({ ...data, written: data.written === 'on' });
+  output.textContent = result.text;
+  output.hidden = false;
+});
+form.querySelector('button[type="submit"]').disabled = false;
+</script>
+<footer aria-label="انتساب پروژه"><div class="publisher-credit" dir="ltr" style="grid-column:1/-1;flex:1 0 100%;text-align:center;padding:.5rem .75rem;font-size:.875rem"><bdi lang="en" dir="ltr">Powered by</bdi> <a href="https://github.com/maddixmhn" rel="me" style="color:inherit;text-decoration:underline"><bdi dir="rtl">محمد مهرانی</bdi></a></div></footer></html>

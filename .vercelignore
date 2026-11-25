@@ -38,3 +38,13 @@ docs/*
 
 !docs/docker-desktop.jpg
 !docs/seminar-results.json
+
+!topology/
+!topology/**
+!docs/homelable-infrastructure.jpg
+
+!university.css
+!university/
+!university/**
+!docs/verified-organization.jpg
+!docs/verified-evaluation-lab.jpg
